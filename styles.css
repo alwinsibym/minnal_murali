@@ -5,153 +5,161 @@
     --lightning-yellow: #ffde00;
     --lightning-blue: #00d4ff;
     --bg-dark: #050608;
-    --glass-bg: rgba(255, 255, 255, 0.03);
-    --glass-border: rgba(255, 255, 255, 0.08);
     --text-white: #ffffff;
     --text-gray: #a0a0a0;
-    --transition-premium: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-cinematic: all 1s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-html {
-    scroll-behavior: smooth;
-    overflow-x: hidden;
-    background-color: var(--bg-dark);
-}
-
-* {
-    margin: 0; padding: 0; box-sizing: border-box;
-}
-
-body {
+html, body {
+    margin: 0; padding: 0;
     background-color: var(--bg-dark);
     color: var(--text-white);
     font-family: 'Outfit', sans-serif;
+    overflow-x: hidden;
 }
 
-/* Navbar */
-nav {
-    position: fixed; top: 0; width: 100%; z-index: 1000;
-    padding: 30px 6%; display: flex; justify-content: space-between; align-items: center;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, transparent 100%);
-    transition: var(--transition-premium);
-}
-
-nav.scrolled {
-    padding: 15px 6%; background: rgba(5, 6, 8, 0.95); backdrop-filter: blur(20px);
-}
-
-.nav-links { display: flex; list-style: none; gap: 40px; }
-.nav-links a {
-    color: var(--text-gray); text-decoration: none;
-    letter-spacing: 2px; font-size: 0.85rem;
-    transition: var(--transition-premium);
-}
-.nav-links a:hover { color: var(--lightning-yellow); }
-
-/* 3D Hero Section - THE CHARACTER FOCUS */
-.hero {
+/* 3D Vertical Scene */
+.poster-scene {
     height: 100vh;
-    display: flex; align-items: center; justify-content: center;
-    position: relative; overflow: hidden;
-    perspective: 2500px;
-    background: #000;
+    width: 100vw;
+    position: relative;
+    overflow: hidden;
+    perspective: 2000px;
 }
 
-.hero-layer {
-    position: absolute; width: 100%; height: 100%;
-    background-position: center; background-size: cover;
-    background-repeat: no-repeat;
+.layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
     pointer-events: none;
+    transition: transform 0.1s ease-out;
 }
 
-.layer-bg {
-    background-image: url('images/strike_bg.png');
-    transform: translateZ(-300px) scale(1.5);
+/* 1. The Cosmic Sky Layer (Top) */
+.layer-sky {
+    background: radial-gradient(circle at top, #001a33, #000);
     z-index: 1;
+    transform: translateZ(-300px) scale(1.5);
 }
 
-/* Middle environment - darkened city/village */
-.layer-mid {
+.vortex {
+    position: absolute;
+    top: -20%; left: 0; width: 100%; height: 60%;
+    background: radial-gradient(ellipse at center, rgba(0, 212, 255, 0.2) 0%, transparent 60%);
+    filter: blur(50px);
+    animation: rotateVortex 20s linear infinite;
+}
+
+@keyframes rotateVortex {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* 2. The City Skyline (Mid-Back) */
+.layer-city {
     background-image: url('images/E-gPPEeVIAodK8z.jpeg');
+    background-position: center 60%; /* Focus on the bottom half */
+    filter: brightness(0.4) grayscale(0.2) blur(2px);
     transform: translateZ(-150px) scale(1.2);
-    filter: brightness(0.3) blur(5px);
     z-index: 2;
 }
 
-/* THE 3D-FIED CHARACTER */
-.layer-character {
+/* 3. The Character on the Rock (The 3D Hero) */
+.layer-hero {
     background-image: url('images/E-gPPEeVIAodK8z.jpeg');
-    transform: translateZ(50px) scale(1.1);
+    background-position: center center;
     z-index: 3;
-    /* Use masks to isolate the character in the center */
-    -webkit-mask-image: radial-gradient(circle at 48.5% 42%, black 15%, transparent 35%);
-    mask-image: radial-gradient(circle at 48.5% 42%, black 15%, transparent 35%);
-    filter: drop-shadow(0 0 50px rgba(0, 212, 255, 0.3));
-    transition: transform 0.1s ease-out;
-}
-
-/* The Logo Card - Floating in Front */
-.hero-logo-card {
-    position: relative;
-    z-index: 4;
-    transform: translateZ(200px);
-    transform-style: preserve-3d;
-    transition: transform 0.1s ease-out;
-    display: flex; flex-direction: column; align-items: center;
-}
-
-.hero-logo-card img {
-    height: 280px;
-    filter: drop-shadow(0 30px 60px rgba(0,0,0,0.9));
-    margin-bottom: 20px;
-}
-
-.hero-btns {
-    display: flex; gap: 20px;
     transform: translateZ(50px);
+    /* Isolating Jaison and the rock platform */
+    -webkit-mask-image: radial-gradient(circle at 48.5% 75%, black 25%, transparent 45%);
+    mask-image: radial-gradient(circle at 48.5% 75%, black 25%, transparent 45%);
+    filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.2));
 }
 
-.btn-primary, .btn-secondary {
-    padding: 15px 40px; border-radius: 4px;
-    font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
-    font-size: 0.8rem; text-decoration: none;
-    transition: var(--transition-premium);
+/* 4. The Logo (Top Front) */
+.poster-logo {
+    position: absolute;
+    top: 50px; left: 50%;
+    transform: translateX(-50%) translateZ(150px);
+    z-index: 10;
+    width: 500px;
+    text-align: center;
 }
 
-.btn-primary { background: var(--primary-red); color: #fff; }
-.btn-primary:hover { transform: scale(1.05); box-shadow: 0 0 30px var(--primary-red); }
-
-.btn-secondary { background: rgba(255,255,255,0.1); color: #fff; border: 1px solid var(--glass-border); }
-.btn-secondary:hover { background: rgba(255,255,255,0.2); border-color: #fff; }
-
-/* Sections */
-section { padding: 120px 10%; position: relative; }
-.section-title {
-    font-size: 5rem; font-family: 'Bebas Neue'; letter-spacing: 5px; margin-bottom: 60px;
-    background: linear-gradient(90deg, #fff, var(--text-gray));
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+.poster-logo img {
+    width: 100%;
+    filter: drop-shadow(0 10px 30px rgba(0,0,0,0.8));
+    animation: glowLogo 4s ease-in-out infinite;
 }
 
-.reveal {
-    opacity: 0; transform: translateY(50px); filter: blur(10px);
-    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.reveal.active { opacity: 1; transform: translateY(0); filter: blur(0); }
-
-/* Premium Cards */
-.premium-card {
-    background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
-    border: 1px solid var(--glass-border); padding: 40px; border-radius: 4px;
+@keyframes glowLogo {
+    0%, 100% { filter: drop-shadow(0 10px 30px rgba(0,0,0,0.8)); }
+    50% { filter: drop-shadow(0 10px 40px rgba(255, 222, 0, 0.3)); }
 }
 
-/* Responsiveness */
-@media (max-width: 900px) {
-    .section-title { font-size: 3.5rem; }
-    .hero-logo-card img { height: 180px; }
+/* 5. Embers and Particles */
+.embers {
+    position: absolute;
+    width: 100%; height: 100%;
+    z-index: 5;
+    background: url('https://www.transparenttextures.com/patterns/stardust.png');
+    opacity: 0.3;
+    pointer-events: none;
+    transform: translateZ(200px);
 }
 
-/* Lightning */
-.lightning-pulse {
+/* 6. Footer Content (Netflix Inspired) */
+.poster-footer {
+    position: absolute;
+    bottom: 40px; left: 50%;
+    transform: translateX(-50%) translateZ(100px);
+    z-index: 10;
+    text-align: center;
+    width: 100%;
+}
+
+.credits {
+    font-size: 0.7rem;
+    color: var(--text-gray);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    opacity: 0.7;
+}
+
+.poster-btns {
+    display: flex; gap: 20px; justify-content: center;
+}
+
+.btn-netflix {
+    background: var(--primary-red);
+    color: white;
+    padding: 12px 35px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    display: flex; align-items: center; gap: 10px;
+    transition: var(--transition-cinematic);
+}
+
+.btn-netflix:hover { background: #ff0000; transform: scale(1.05); }
+
+/* Navigation Reveal */
+nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    padding: 20px 6%; display: flex; justify-content: space-between;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.6), transparent);
+}
+
+.nav-links { display: flex; list-style: none; gap: 30px; }
+.nav-links a { color: #ccc; text-decoration: none; font-size: 0.8rem; letter-spacing: 1px; }
+
+/* Custom Lightning Pulse */
+.lightning {
     position: fixed; top:0; left:0; width:100%; height:100%;
     background: white; pointer-events:none; z-index:9999; opacity:0;
 }

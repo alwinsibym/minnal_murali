@@ -1,24 +1,28 @@
-// 3D Parallax Orchestrator
-const logoCard = document.getElementById("logoCard");
-const layerChar = document.getElementById("layerChar");
-const layerMid = document.getElementById("layerMid");
-const layerBg = document.getElementById("layerBg");
+// Poster Parallax & Interaction
+const sky = document.getElementById("layerSky");
+const city = document.getElementById("layerCity");
+const hero = document.getElementById("layerHero");
+const logo = document.getElementById("posterLogo");
+const footer = document.getElementById("posterFooter");
 
 window.addEventListener("mousemove", (e) => {
-    const x = (e.clientX - window.innerWidth / 2) / 20;
-    const y = (e.clientY - window.innerHeight / 2) / 20;
+    const x = (e.clientX - window.innerWidth / 2) / 25;
+    const y = (e.clientY - window.innerHeight / 2) / 25;
 
-    // Logo Card - Aggressive Tilt
-    logoCard.style.transform = `translateZ(200px) rotateY(${x * 0.5}deg) rotateX(${-y * 0.5}deg)`;
+    // Logo - Front floating
+    logo.style.transform = `translateX(-50%) translateZ(150px) rotateY(${x * 0.4}deg) rotateX(${-y * 0.4}deg)`;
     
-    // Character Layer - POP OUT 3D
-    layerChar.style.transform = `translateZ(80px) translate3d(${x * 0.8}px, ${y * 0.8}px, 0)`;
+    // Character - Middle Pop
+    hero.style.transform = `translateZ(50px) translate3d(${x * 0.8}px, ${y * 0.8}px, 0)`;
     
-    // Mid Layer - Environment Parallax
-    layerMid.style.transform = `translateZ(-100px) translate3d(${-x * 0.3}px, ${-y * 0.3}px, 0) scale(1.2)`;
+    // City - Receding
+    city.style.transform = `translateZ(-150px) translate3d(${-x * 0.2}px, ${-y * 0.2}px, 0) scale(1.2)`;
     
-    // Background Layer - Deep Space
-    layerBg.style.transform = `translateZ(-250px) translate3d(${-x * 0.15}px, ${-y * 0.15}px, 0) scale(1.5)`;
+    // Sky - Deep Space
+    sky.style.transform = `translateZ(-300px) translate3d(${-x * 0.1}px, ${-y * 0.1}px, 0) scale(1.5)`;
+    
+    // Footer
+    footer.style.transform = `translateX(-50%) translateZ(100px) translate3d(${x * 0.2}px, ${y * 0.2}px, 0)`;
 });
 
 // Sound Manager
@@ -29,7 +33,7 @@ let isPlaying = false;
 document.getElementById("muteButton").addEventListener("click", () => {
     const icon = document.getElementById("soundIcon");
     if (!isPlaying) {
-        audio.play();
+        audio.play().catch(err => console.log("Init required"));
         icon.classList.replace("fa-volume-off", "fa-volume-up");
     } else {
         audio.pause();
@@ -38,21 +42,12 @@ document.getElementById("muteButton").addEventListener("click", () => {
     isPlaying = !isPlaying;
 });
 
-// Reveal Triggers
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add("active");
-    });
-}, { threshold: 0.1 });
-
-document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
-
-// Lightning Trigger
+// Lightning
 const flash = document.getElementById("lightningFlash");
 function strike() {
-    if (Math.random() > 0.95) {
-        flash.style.opacity = "0.5";
-        setTimeout(() => { flash.style.opacity = "0"; }, 70);
+    if (Math.random() > 0.97) {
+        flash.style.opacity = "0.4";
+        setTimeout(() => { flash.style.opacity = "0"; }, 80);
     }
 }
-setInterval(strike, 3000);
+setInterval(strike, 2000);

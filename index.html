@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MINNAL MURALI | The Legend Original</title>
+    <title>MINNAL MURALI | Netflix Original Film</title>
     <link rel="icon" href="favicon.png" type="image/x-icon">
     
     <!-- Fonts & Icons -->
@@ -12,62 +12,52 @@
 </head>
 <body>
 
-    <div class="lightning-pulse" id="lightningFlash"></div>
+    <div class="lightning" id="lightningFlash"></div>
 
-    <nav id="navbar">
-        <div class="logo">
-            <a href="#"><img src="images/minnal-murali-61ec09d44cdd7.png" alt="Minnal Murali" style="height: 35px;"></a>
+    <nav>
+        <div class="nav-links">
+            <li><a href="#hero">The Legend</a></li>
+            <li><a href="#cast">Cast</a></li>
         </div>
-        <ul class="nav-links">
-            <li><a href="#hero">Origin</a></li>
-            <li><a href="#about">The Strike</a></li>
-            <li><a href="#cast">Heroes</a></li>
-            <li><a href="#soundtrack">The Score</a></li>
-        </ul>
-        <div class="nav-extra">
-            <button id="muteButton" class="sound-toggle"><i id="soundIcon" class="fas fa-volume-up"></i></button>
+        <div class="nav-right">
+            <button id="muteButton" style="background:none; border:none; color:#fff; cursor:pointer;"><i id="soundIcon" class="fas fa-volume-up"></i></button>
         </div>
     </nav>
 
-    <main>
-        <!-- 3D Scene Hero -->
-        <section id="hero" class="hero">
-            <!-- Background Layer (Storm) -->
-            <div class="hero-layer layer-bg" id="layerBg"></div>
-            
-            <!-- Mid Layer (Environment Blur) -->
-            <div class="hero-layer layer-mid" id="layerMid"></div>
-            
-            <!-- THE 3D CHARACTER LAYER -->
-            <div class="hero-layer layer-character" id="layerChar"></div>
-            
-            <!-- Top Layer (Logo & Content) -->
-            <div class="hero-logo-card" id="logoCard">
-                <img src="images/minnal-murali-61ec09d44cdd7.png" alt="Original Logo">
-                <div class="hero-btns">
-                    <a href="https://www.netflix.com/title/81497215" target="_blank" class="btn-primary">Watch Now</a>
-                    <a href="#about" class="btn-secondary">Explore Story</a>
-                </div>
-            </div>
-        </section>
+    <main class="poster-scene" id="hero">
+        <!-- Layer 1: Sky & Vortex -->
+        <div class="layer layer-sky" id="layerSky">
+            <div class="vortex"></div>
+        </div>
 
-        <section id="about" class="reveal">
-            <h2 class="section-title">THE STRIKE</h2>
-            <div class="premium-card">
-                <div style="display: flex; gap: 50px; align-items: center;">
-                    <div style="flex: 1;">
-                        <p style="font-size: 1.2rem; color: #fff; margin-bottom: 25px;">Kurukkanmoola, 1994. A planetary alignment that happens once in 700 years.</p>
-                        <p style="color: var(--text-gray); margin-bottom: 20px;">A rare bolt of lightning strikes Jaison and Shibu simultaneously. One finds strength in his goodness, the other finds justification for his pain.</p>
-                        <p style="color: var(--text-gray);">Basil Joseph crafts a superhero epic that remains deeply rooted in the heart of Kerala.</p>
-                    </div>
-                    <div style="flex: 1;">
-                        <img src="images/strike_bg.png" alt="Thunder" style="width: 100%; border-radius: 4px;">
-                    </div>
-                </div>
-            </div>
-        </section>
+        <!-- Layer 2: City Foundation -->
+        <div class="layer layer-city" id="layerCity"></div>
 
-        <!-- Cast & Soundtrack sections removed for brevity in this snippet, but kept in mind for final -->
+        <!-- Layer 3: THE HERO (Standing on Rock) -->
+        <div class="layer layer-hero" id="layerHero"></div>
+
+        <!-- Layer 4: Embers -->
+        <div class="layer embers"></div>
+
+        <!-- Layer 5: The Original Logo (TOP) -->
+        <div class="poster-logo" id="posterLogo">
+            <img src="images/minnal-murali-61ec09d44cdd7.png" alt="Minnal Murali">
+        </div>
+
+        <!-- Layer 6: Credits & Buttons (BOTTOM) -->
+        <div class="poster-footer" id="posterFooter">
+            <div class="credits">
+                A BASIL JOSEPH FILM • PRODUCED BY SOPHIA PAUL • SCORE BY SUSHIN SHYAM
+            </div>
+            <div class="poster-btns">
+                <a href="https://www.netflix.com/title/81497215" target="_blank" class="btn-netflix">
+                    <i class="fas fa-play"></i> Watch Film
+                </a>
+                <a href="#" class="btn-netflix" style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2);">
+                    Explore More
+                </a>
+            </div>
+        </div>
     </main>
 
     <script src="script.js"></script>
