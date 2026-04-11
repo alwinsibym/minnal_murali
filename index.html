@@ -3,27 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MINNAL MURALI | The Legend Original</title>
+    <title>MINNAL MURALI | The Kurukkanmoola Legend</title>
     <link rel="icon" href="favicon.png" type="image/x-icon">
     
-    <!-- Fonts & Icons -->
+    <!-- Fonts & Style -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="scene-container">
 
-    <div class="lightning" id="lightningFlash"></div>
+    <div class="lightning-flash" id="lightningFlash"></div>
 
     <nav id="navbar">
         <div class="logo">
-            <a href="#"><img src="images/logo_new.png" alt="Minnal Murali"></a>
+            <a href="#"><img src="images/minnal-murali-61ec09d44cdd7.png" alt="Minnal Murali" style="height: 40px;"></a>
         </div>
         <ul class="nav-links">
-            <li><a href="#hero">Origin</a></li>
+            <li><a href="#hero">The Legend</a></li>
             <li><a href="#about">The Strike</a></li>
-            <li><a href="#cast">Cast</a></li>
-            <li><a href="#gallery">Gallery</a></li>
-            <li><a href="#soundtrack">Soundtrack</a></li>
+            <li><a href="#cast">Heroes</a></li>
+            <li><a href="#gallery">Moments</a></li>
+            <li><a href="#soundtrack">The Score</a></li>
         </ul>
         <div class="nav-extra">
             <button id="muteButton" class="sound-toggle"><i id="soundIcon" class="fas fa-volume-up"></i></button>
@@ -31,200 +31,122 @@
     </nav>
 
     <main>
+        <!-- 3D Parallax Hero -->
         <section id="hero" class="hero">
-            <div class="hero-bg"></div>
-            <div class="hero-content">
-                <h1>AN EXTRAORDINARY<br>LEGEND</h1>
-                <p>One bolt. Two lives. A rural village in Kerala becomes the battlefield for India's first organic superhero origin.</p>
-                <div class="hero-btns">
-                    <a href="https://www.netflix.com/title/81497215" target="_blank" class="btn-primary">Watch Film</a>
-                    <a href="#about" class="btn-secondary">The Story</a>
+            <div class="hero-bg-layer"></div>
+            <div class="hero-mid-layer"></div>
+            
+            <div class="hero-logo-box" id="heroLogo">
+                <img src="images/minnal-murali-61ec09d44cdd7.png" alt="Minnal Murali Original Logo">
+                <div class="hero-content">
+                    <div class="hero-btns">
+                        <a href="https://www.netflix.com/title/81497215" target="_blank" class="btn-primary">Watch on Netflix</a>
+                        <a href="#about" class="btn-secondary">The Origin</a>
+                    </div>
                 </div>
             </div>
         </section>
 
+        <!-- Story Section -->
         <section id="about" class="reveal">
-            <h2 class="section-title">The Strike</h2>
-            <div class="about-container">
-                <div class="about-text">
-                    <p>On a night when Kurukkanmoola was bathed in the light of an ancient comet, a rare planetary alignment triggered a lightning bolt of unimaginable power.</p>
-                    <p>It didn't just strike once. It struck two men. Jaison, a simple tailor with big dreams, and Shibu, a lonely soul searching for purpose. One became a saviour; the other, a shadow.</p>
-                    <p>Directed by Basil Joseph, this cinematic masterpiece redefined the superhero genre for Indian cinema, blending local heart with global scale.</p>
-                </div>
-                <div class="about-image">
-                    <img src="images/minnalmurali-20211224142436-17951.jpg" alt="Minnal Murali Action">
+            <h2 class="section-title">THE STRIKE</h2>
+            <div class="premium-card">
+                <div class="about-container" style="display: flex; gap: 60px; align-items: center;">
+                    <div class="about-text" style="flex: 1;">
+                        <p style="font-size: 1.2rem; margin-bottom: 25px; color: #fff;">Kurukkanmoola, 1994. A planetary alignment that happens once in 700 years.</p>
+                        <p style="color: var(--text-gray); margin-bottom: 20px;">A rare bolt of lightning, carrying the energy of a thousand storms, strikes the village. Two men are caught in its path. One discovers the hero within, the other is consumed by the power.</p>
+                        <p style="color: var(--text-gray);">This is not just a superhero movie; it's the heart of Kerala, brought to life with a cinematic scale never seen before in Malayalam cinema.</p>
+                    </div>
+                    <div class="about-image" style="flex: 1;">
+                        <img src="images/strike_bg.png" alt="The Strike" style="width: 100%; border-radius: 4px; border: 1px solid var(--glass-border);">
+                    </div>
                 </div>
             </div>
         </section>
 
+        <!-- Cast Section -->
         <section id="cast" class="reveal">
-            <h2 class="section-title">The Cast</h2>
+            <h2 class="section-title">CAST & CREW</h2>
             <div class="cast-grid">
-                <!-- Tovino -->
                 <div class="cast-card">
-                    <img src="images/3BqRwLPqsSgGwbQszv9dUkUrypA.jpg" alt="Tovino Thomas">
+                    <img src="images/3BqRwLPqsSgGwbQszv9dUkUrypA.jpg" alt="Tovino">
                     <div class="cast-overlay">
                         <h3>Tovino Thomas</h3>
                         <p>Jaison / Minnal Murali</p>
-                        <a href="https://www.instagram.com/tovinothomas/" target="_blank" class="instagram-link"><i class="fab fa-instagram"></i> Follow</a>
+                        <a href="https://www.instagram.com/tovinothomas/" target="_blank" class="instagram-link"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
-                <!-- Guru -->
                 <div class="cast-card">
-                    <img src="images/karthik-s-minnal-final-2.jpg" alt="Guru Somasundaram">
+                    <img src="images/karthik-s-minnal-final-2.jpg" alt="Guru">
                     <div class="cast-overlay">
                         <h3>Guru Somasundaram</h3>
-                        <p>Shibu / Super Villain</p>
-                        <a href="https://www.instagram.com/gurusomasundaram/" target="_blank" class="instagram-link"><i class="fab fa-instagram"></i> Follow</a>
+                        <p>Shibu / The Antagonist</p>
+                        <a href="https://www.instagram.com/gurusomasundaram/" target="_blank" class="instagram-link"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
-                <!-- Femina -->
                 <div class="cast-card">
-                    <img src="images/abhi-vpm-minnal-2-copy.jpg" alt="Femina George">
+                    <img src="images/abhi-vpm-minnal-2-copy.jpg" alt="Femina">
                     <div class="cast-overlay">
                         <h3>Femina George</h3>
                         <p>Bruce Lee Biji</p>
-                        <a href="https://www.instagram.com/feminageorge_/" target="_blank" class="instagram-link"><i class="fab fa-instagram"></i> Follow</a>
+                        <a href="https://www.instagram.com/feminageorge_/" target="_blank" class="instagram-link"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
-                <!-- Shelly -->
                 <div class="cast-card">
-                    <img src="images/E-gPPEeVIAodK8z.jpeg" alt="Shelly Kishore">
+                    <img src="images/E-gPPEeVIAodK8z.jpeg" alt="Shelly">
                     <div class="cast-overlay">
                         <h3>Shelly Kishore</h3>
                         <p>Usha</p>
-                        <a href="https://www.instagram.com/shelly.kishore/" target="_blank" class="instagram-link"><i class="fab fa-instagram"></i> Follow</a>
-                    </div>
-                </div>
-                <!-- Aju -->
-                <div class="cast-card">
-                    <img src="images/Screenshot (66).png" alt="Aju Varghese">
-                    <div class="cast-overlay">
-                        <h3>Aju Varghese</h3>
-                        <p>PC Siby Pappen</p>
-                        <a href="https://www.instagram.com/ajuvarghese/" target="_blank" class="instagram-link"><i class="fab fa-instagram"></i> Follow</a>
-                    </div>
-                </div>
-                <!-- Basil -->
-                <div class="cast-card">
-                    <img src="images/logo_new.png" alt="Basil Joseph">
-                    <div class="cast-overlay">
-                        <h3>Basil Joseph</h3>
-                        <p>The Visionary</p>
-                        <a href="https://www.instagram.com/basiljoseph/" target="_blank" class="instagram-link"><i class="fab fa-instagram"></i> Follow</a>
+                        <a href="https://www.instagram.com/shelly.kishore/" target="_blank" class="instagram-link"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="trailer" class="reveal">
-            <h2 class="section-title">Cinematic Trailer</h2>
-            <div class="video-container">
-                <iframe width="100%" height="600" src="https://www.youtube.com/embed/zAUAliz1TKA?autoplay=1&mute=1&loop=1&playlist=zAUAliz1TKA" title="Minnal Murali Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-        </section>
-
-        <section id="gallery" class="reveal">
-            <h2 class="section-title">Kurukkanmoola Gallery</h2>
-            <div class="gallery-grid">
-                <div class="gallery-item"><img src="images/abhi-vpm-minnal-2-copy.jpg" alt="Stills"></div>
-                <div class="gallery-item"><img src="images/karthik-s-minnal-final-2.jpg" alt="Stills"></div>
-                <div class="gallery-item"><img src="images/3BqRwLPqsSgGwbQszv9dUkUrypA.jpg" alt="Stills"></div>
-                <div class="gallery-item"><img src="images/E-gPPEeVIAodK8z.jpeg" alt="Stills"></div>
-                <div class="gallery-item"><img src="images/strike_bg.png" alt="Legendary Night"></div>
-                <div class="gallery-item"><img src="images/Screenshot (66).png" alt="Director at work"></div>
-            </div>
-        </section>
-
+        <!-- Soundtrack Section -->
         <section id="soundtrack" class="reveal">
-            <h2 class="section-title">Original Soundtrack</h2>
-            <div class="soundtrack-container">
-                <div class="player-controls">
-                    <div class="track-list">
+            <h2 class="section-title">THE SCORE</h2>
+            <div class="media-player-ui">
+                <div class="soundtrack-container" style="display: flex; gap: 40px; align-items: center;">
+                    <div class="track-list" style="flex: 1;">
                         <div class="track-item active" data-track="0">
                             <span class="track-num">01</span>
                             <div class="track-info">
                                 <h4>The Rise of Minnal</h4>
-                                <p>Sushin Shyam • Original Score</p>
+                                <p>Sushin Shyam</p>
                             </div>
-                            <i class="fas fa-play"></i>
                         </div>
                         <div class="track-item" data-track="1">
                             <span class="track-num">02</span>
                             <div class="track-info">
                                 <h4>Kurukkanmoola Theme</h4>
-                                <p>Sushin Shyam • Cinematic Session</p>
+                                <p>Sushin Shyam</p>
                             </div>
-                            <i class="fas fa-play"></i>
-                        </div>
-                        <div class="track-item" data-track="2">
-                            <span class="track-num">03</span>
-                            <div class="track-info">
-                                <h4>Shibu's Descent</h4>
-                                <p>Sushin Shyam • Dark Atmosphere</p>
-                            </div>
-                            <i class="fas fa-play"></i>
                         </div>
                     </div>
-                </div>
-
-                <div class="media-player-ui">
-                    <div class="album-art"></div>
-                    <div class="now-playing">
-                        <h3 id="currentTrackTitle">The Rise of Minnal</h3>
-                        <p id="currentTrackArtist">Sushin Shyam</p>
-                    </div>
-                    <div class="progress-area">
-                        <div class="progress-container">
-                            <div class="progress-bar" id="progressBar"></div>
+                    <div class="media-viz" style="width: 300px; text-align: center;">
+                        <div class="visualizer" style="height: 60px; display: flex; gap: 4px; justify-content: center; align-items: flex-end;">
+                            <div class="visualizer-bar" style="width: 6px; background: var(--primary-red); height: 40%; animation: bounce 0.8s infinite;"></div>
+                            <div class="visualizer-bar" style="width: 6px; background: var(--primary-red); height: 80%; animation: bounce 1s infinite;"></div>
+                            <div class="visualizer-bar" style="width: 6px; background: var(--primary-red); height: 60%; animation: bounce 1.2s infinite;"></div>
                         </div>
-                        <div class="time-stamps" style="display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-gray);">
-                            <span id="currentTime">0:00</span>
-                            <span id="totalTime">3:45</span>
+                        <div class="player-controls" style="margin-top: 25px;">
+                            <i id="mainPlayBtn" class="fas fa-play-circle" style="font-size: 3rem; cursor: pointer;"></i>
                         </div>
-                    </div>
-                    <div class="main-controls">
-                        <i class="fas fa-random"></i>
-                        <i class="fas fa-step-backward"></i>
-                        <i id="mainPlayBtn" class="fas fa-play-circle play-btn"></i>
-                        <i class="fas fa-step-forward"></i>
-                        <i class="fas fa-redo"></i>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="coming-soon" class="coming-soon">
-            <div class="countdown-container">
-                <h2>THE SAGA CONTINUES</h2>
-                <div id="countdown" class="timer">
-                    <div class="time-box"><span id="days">00</span><p>Days</p></div>
-                    <div class="time-box"><span id="hours">00</span><p>Hours</p></div>
-                    <div class="time-box"><span id="minutes">00</span><p>Mins</p></div>
-                    <div class="time-box"><span id="seconds">00</span><p>Secs</p></div>
-                </div>
-                <p>Curated for the fans. Directed for the legend.</p>
-            </div>
-        </section>
     </main>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-logo"><img src="images/logo_new.png" alt="Logo"></div>
-            <div class="social-links">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-youtube"></i></a>
-            </div>
-            <div class="footer-links" style="margin: 20px 0; display: flex; justify-content: center; gap: 30px; font-size: 0.8rem; color: var(--text-gray);">
-                <a href="#" style="color: inherit; text-decoration: none;">Privacy Policy</a>
-                <a href="#" style="color: inherit; text-decoration: none;">Terms of Use</a>
-                <a href="#" style="color: inherit; text-decoration: none;">Cookie Settings</a>
-                <a href="#" style="color: inherit; text-decoration: none;">Contact Us</a>
-            </div>
-            <p style="font-size: 0.7rem; color: var(--text-gray); opacity: 0.6;">&copy; 2024 WEEKEND BLOCKBUSTERS. DISTRIBUTED WORLDWIDE BY NETFLIX.</p>
+    <footer style="padding: 100px 10% 50px; background: #000; text-align: center;">
+        <img src="images/minnal-murali-61ec09d44cdd7.png" alt="Logo" style="height: 60px; margin-bottom: 40px;">
+        <div class="socials" style="display: flex; justify-content: center; gap: 30px; margin-bottom: 40px;">
+            <a href="#" style="color: var(--text-gray); font-size: 1.5rem;"><i class="fab fa-instagram"></i></a>
+            <a href="#" style="color: var(--text-gray); font-size: 1.5rem;"><i class="fab fa-twitter"></i></a>
         </div>
+        <p style="font-size: 0.8rem; color: #444; letter-spacing: 2px;">WEEKEND BLOCKBUSTERS • KURUKKANMOOLA CHRONICLES</p>
     </footer>
 
     <script src="script.js"></script>
