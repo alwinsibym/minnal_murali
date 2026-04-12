@@ -1,4 +1,4 @@
-# ⚡ Minnal Murali — Fan WebPage
+# ⚡ Minnal Murali — Fan Website
 
 <p align="center">
   <a href="https://alwinsibym.github.io/minnal_murali/index.html">
