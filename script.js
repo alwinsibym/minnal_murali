@@ -1,53 +1,73 @@
-// Poster Parallax & Interaction
-const sky = document.getElementById("layerSky");
-const city = document.getElementById("layerCity");
-const hero = document.getElementById("layerHero");
-const logo = document.getElementById("posterLogo");
-const footer = document.getElementById("posterFooter");
+// 3D & Live Effects Manager
+const logo3D = document.getElementById("logo3D");
+const navbar = document.getElementById("navbar");
+const flash = document.getElementById("lightningFlash");
+const bgm = document.getElementById("bgm");
+const soundToggle = document.getElementById("soundToggle");
+const vizBars = document.querySelectorAll(".viz-bar");
 
+// 1. 3D Logo Tilt Interaction
 window.addEventListener("mousemove", (e) => {
-    const x = (e.clientX - window.innerWidth / 2) / 25;
-    const y = (e.clientY - window.innerHeight / 2) / 25;
+    const x = (e.clientX - window.innerWidth / 2) / 20;
+    const y = (e.clientY - window.innerHeight / 2) / 20;
 
-    // Logo - Front floating
-    logo.style.transform = `translateX(-50%) translateZ(150px) rotateY(${x * 0.4}deg) rotateX(${-y * 0.4}deg)`;
-    
-    // Character - Middle Pop
-    hero.style.transform = `translateZ(50px) translate3d(${x * 0.8}px, ${y * 0.8}px, 0)`;
-    
-    // City - Receding
-    city.style.transform = `translateZ(-150px) translate3d(${-x * 0.2}px, ${-y * 0.2}px, 0) scale(1.2)`;
-    
-    // Sky - Deep Space
-    sky.style.transform = `translateZ(-300px) translate3d(${-x * 0.1}px, ${-y * 0.1}px, 0) scale(1.5)`;
-    
-    // Footer
-    footer.style.transform = `translateX(-50%) translateZ(100px) translate3d(${x * 0.2}px, ${y * 0.2}px, 0)`;
+    if (logo3D) {
+        logo3D.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
+    }
 });
 
-// Sound Manager
-const audio = new Audio("BGM.mp3");
-audio.loop = true;
-let isPlaying = false;
+// 2. Live Lightning Effects
+function triggerLightning() {
+    if (Math.random() > 0.98) {
+        flash.style.backgroundColor = "rgba(255, 255, 255, 0.4)";
+        setTimeout(() => {
+            flash.style.backgroundColor = "rgba(255, 255, 255, 0)";
+            // Potential double strike
+            if (Math.random() > 0.5) {
+                setTimeout(() => {
+                    flash.style.backgroundColor = "rgba(255, 255, 255, 0.2)";
+                    setTimeout(() => flash.style.backgroundColor = "rgba(255, 255, 255, 0)", 50);
+                }, 100);
+            }
+        }, 100);
+    }
+}
+setInterval(triggerLightning, 2000);
 
-document.getElementById("muteButton").addEventListener("click", () => {
-    const icon = document.getElementById("soundIcon");
+// 3. Live Music Logic
+let isPlaying = false;
+soundToggle.addEventListener("click", () => {
     if (!isPlaying) {
-        audio.play().catch(err => console.log("Init required"));
-        icon.classList.replace("fa-volume-off", "fa-volume-up");
+        bgm.play().catch(() => console.log("User interaction required"));
+        vizBars.forEach(bar => bar.classList.add("playing"));
     } else {
-        audio.pause();
-        icon.classList.replace("fa-volume-up", "fa-volume-off");
+        bgm.pause();
+        vizBars.forEach(bar => bar.classList.remove("playing"));
     }
     isPlaying = !isPlaying;
 });
 
-// Lightning
-const flash = document.getElementById("lightningFlash");
-function strike() {
-    if (Math.random() > 0.97) {
-        flash.style.opacity = "0.4";
-        setTimeout(() => { flash.style.opacity = "0"; }, 80);
+// 4. Navbar Scroll Effect (Blur)
+window.addEventListener("scroll", () => {
+    if (window.scrollY > 50) {
+        navbar.classList.add("scrolled");
+    } else {
+        navbar.classList.remove("scrolled");
     }
-}
-setInterval(strike, 2000);
+});
+
+// 5. Scroll Reveal
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+        }
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
+
+// Home Navigation Redirect Logic
+document.querySelector(".nav-logo").addEventListener("click", (e) => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});

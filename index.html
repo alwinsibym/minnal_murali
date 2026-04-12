@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MINNAL MURALI | Netflix Original Film</title>
+    <title>MINNAL MURALI | The Cinematic Legend</title>
     <link rel="icon" href="favicon.png" type="image/x-icon">
     
     <!-- Fonts & Icons -->
@@ -12,53 +12,73 @@
 </head>
 <body>
 
-    <div class="lightning" id="lightningFlash"></div>
+    <div class="lightning-overlay" id="lightningFlash"></div>
 
-    <nav>
-        <div class="nav-links">
-            <li><a href="#hero">The Legend</a></li>
-            <li><a href="#cast">Cast</a></li>
+    <nav id="navbar">
+        <div class="nav-left">
+            <a href="#hero"><img src="images/minnal-murali-61ec09d44cdd7.png" alt="Logo" class="nav-logo"></a>
+            <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">Story</a></li>
+                <li><a href="#cast">Heroes</a></li>
+                <li><a href="#soundtrack">Music</a></li>
+            </ul>
         </div>
         <div class="nav-right">
-            <button id="muteButton" style="background:none; border:none; color:#fff; cursor:pointer;"><i id="soundIcon" class="fas fa-volume-up"></i></button>
+            <div class="sound-viz" id="soundToggle">
+                <div class="viz-bar"></div>
+                <div class="viz-bar"></div>
+                <div class="viz-bar"></div>
+                <div class="viz-bar"></div>
+                <span style="font-size: 0.7rem; letter-spacing: 1px; margin-left: 8px;">SOUND</span>
+            </div>
         </div>
     </nav>
 
-    <main class="poster-scene" id="hero">
-        <!-- Layer 1: Sky & Vortex -->
-        <div class="layer layer-sky" id="layerSky">
-            <div class="vortex"></div>
-        </div>
-
-        <!-- Layer 2: City Foundation -->
-        <div class="layer layer-city" id="layerCity"></div>
-
-        <!-- Layer 3: THE HERO (Standing on Rock) -->
-        <div class="layer layer-hero" id="layerHero"></div>
-
-        <!-- Layer 4: Embers -->
-        <div class="layer embers"></div>
-
-        <!-- Layer 5: The Original Logo (TOP) -->
-        <div class="poster-logo" id="posterLogo">
-            <img src="images/minnal-murali-61ec09d44cdd7.png" alt="Minnal Murali">
-        </div>
-
-        <!-- Layer 6: Credits & Buttons (BOTTOM) -->
-        <div class="poster-footer" id="posterFooter">
-            <div class="credits">
-                A BASIL JOSEPH FILM • PRODUCED BY SOPHIA PAUL • SCORE BY SUSHIN SHYAM
+    <main>
+        <!-- Landing Section -->
+        <section id="hero" class="hero">
+            <div class="logo-container-3d" id="logo3D">
+                <img src="images/minnal-murali-61ec09d44cdd7.png" alt="Minnal Murali Original Logo" class="main-logo-3d">
+                <div class="hero-caption">
+                    A BASIL JOSEPH FILM • PRODUCED BY SOPHIA PAUL • SCORE BY SUSHIN SHYAM
+                </div>
+                <div class="hero-btns">
+                    <a href="https://www.netflix.com/title/81497215" target="_blank" class="btn-premium btn-netflix">
+                        <i class="fas fa-play"></i> Watch Film
+                    </a>
+                    <a href="#about" class="btn-premium btn-explore">
+                        Explore Legend
+                    </a>
+                </div>
             </div>
-            <div class="poster-btns">
-                <a href="https://www.netflix.com/title/81497215" target="_blank" class="btn-netflix">
-                    <i class="fas fa-play"></i> Watch Film
-                </a>
-                <a href="#" class="btn-netflix" style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2);">
-                    Explore More
-                </a>
+        </section>
+
+        <!-- Story Section -->
+        <section id="about" class="reveal">
+            <h2 class="section-title">THE ORIGIN</h2>
+            <div class="about-container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+                <div class="about-text">
+                    <p style="font-size: 1.1rem; color: #fff; margin-bottom: 25px; line-height: 1.8;">In 1994, a rare planetary alignment triggers a massive lightning strike in the small village of Kurukkanmoola. Jaison, a tailor, and Shibu, an outcast, are both struck by the same bolt.</p>
+                    <p style="color: var(--text-gray); line-height: 1.8;">Gaining extraordinary speed and reflexes, Jaison must decide whether to use his powers for personal gain or protect his village from a dark force rising from the same lightning.</p>
+                </div>
+                <div class="about-img">
+                    <img src="images/minnalmurali-20211224142436-17951.jpg" alt="Story" style="width: 100%; border-radius: 4px; box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
+                </div>
             </div>
-        </div>
+        </section>
+
+        <!-- Cast & Soundtrack sections can be added back/traversed via links -->
     </main>
+
+    <footer style="padding: 60px 10%; background: #000; text-align: center; border-top: 1px solid var(--glass-border);">
+        <p style="font-size: 0.7rem; color: #444; letter-spacing: 2px;">© 2024 WEEKEND BLOCKBUSTERS. ALL RIGHTS RESERVED.</p>
+    </footer>
+
+    <!-- Audio Element -->
+    <audio id="bgm" loop>
+        <source src="BGM.mp3" type="audio/mpeg">
+    </audio>
 
     <script src="script.js"></script>
 </body>
