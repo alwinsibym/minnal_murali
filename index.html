@@ -1,114 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MINNAL MURALI | The Legend Requiem</title>
-    <link rel="icon" href="favicon.png" type="image/x-icon">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/assets/minnal-murali-61ec09d44cdd7.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MINNAL MURALI | The Reactor</title>
     
-    <!-- Fonts & Icons -->
+    <!-- Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@100;300;400;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-
-    <!-- HUD Elements -->
-    <div class="hud-layer">
-        <div class="hud-corner hud-tl"></div>
-        <div class="hud-corner hud-tr"></div>
-        <div class="hud-corner hud-bl"></div>
-        <div class="hud-corner hud-br"></div>
-        <div class="hud-scanner"></div>
-    </div>
-
-    <div class="flash-overlay" id="lightningFlash"></div>
-
-    <!-- Side HUD Navigation -->
-    <div class="side-nav">
-        <div class="nav-dot active" data-section="0"></div>
-        <div class="nav-dot" data-section="1"></div>
-        <div class="nav-dot" data-section="2"></div>
-        <div class="nav-dot" data-section="3"></div>
-    </div>
-
-    <!-- Main Navigation -->
-    <nav>
-        <div class="nav-left">
-            <a href="#"><img src="images/minnal-murali-61ec09d44cdd7.png" alt="Logo" class="nav-logo"></a>
-        </div>
-        <div class="nav-right">
-            <div id="soundToggle" style="cursor: pointer; color: #fff; font-size: 0.8rem; letter-spacing: 2px;">
-                <i class="fas fa-volume-up"></i> AUDIO_ON
-            </div>
-        </div>
-    </nav>
-
-    <main id="mainContainer">
-        <!-- Section 1: Hero Poster -->
-        <section id="hero" class="hero">
-            <div class="logo-display" id="logo3D">
-                <img src="images/minnal-murali-61ec09d44cdd7.png" alt="Logo" class="main-logo">
-                <div style="font-size: 0.7rem; letter-spacing: 6px; text-transform: uppercase; margin-top: 20px; color: var(--text-gray);">
-                    THE FIRST SUPERHERO OF MALAYALAM CINEMA
-                </div>
-                <div style="margin-top: 40px; display: flex; gap: 20px; justify-content: center;">
-                    <a href="https://www.netflix.com/title/81497215" target="_blank" style="padding: 15px 40px; background: var(--primary-red); color: #fff; text-decoration: none; font-weight: 800; border-radius: 2px; font-size: 0.8rem; letter-spacing: 2px;">WATCH ON NETFLIX</a>
-                    <a href="#characters" style="padding: 15px 40px; background: rgba(255,255,255,0.1); color: #fff; text-decoration: none; font-weight: 800; border-radius: 2px; font-size: 0.8rem; border: 1px solid rgba(255,255,255,0.1); letter-spacing: 2px;">EXPLORE MISSION</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 2: Character Dossier -->
-        <section id="characters" class="character-section">
-            <div class="char-card">
-                <img src="images/3BqRwLPqsSgGwbQszv9dUkUrypA.jpg" alt="Tovino">
-                <div class="char-info">
-                    <div class="char-role">Experimental Subject #01</div>
-                    <div class="char-name">Tovino Thomas</div>
-                    <p style="font-size: 0.8rem; color: #888; margin-top: 15px;">Target: Jaison. Powers: Super Speed, Strength, Reflexes.</p>
-                </div>
-            </div>
-            <div class="char-card">
-                <img src="images/karthik-s-minnal-final-2.jpg" alt="Guru">
-                <div class="char-info">
-                    <div class="char-role">Experimental Subject #02</div>
-                    <div class="char-name">Guru Somasundaram</div>
-                    <p style="font-size: 0.8rem; color: #888; margin-top: 15px;">Target: Shibu. Status: Rogue. Threat Level: High.</p>
-                </div>
-            </div>
-            <div class="char-card">
-                <img src="images/abhi-vpm-minnal-2-copy.jpg" alt="Femina">
-                <div class="char-info">
-                    <div class="char-role">Tactical Ally</div>
-                    <div class="char-name">Femina George</div>
-                    <p style="font-size: 0.8rem; color: #888; margin-top: 15px;">Codename: Bruce Lee Biji. Expert in Martial Arts.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 3: World / Story -->
-        <section id="story" style="background: #050608; padding: 10%;">
-            <div style="border-left: 2px solid var(--primary-red); padding-left: 40px; max-width: 800px;">
-                <h2 style="font-family: 'Bebas Neue'; font-size: 4rem; letter-spacing: 4px; margin-bottom: 30px;">THE MISSION</h2>
-                <p style="font-size: 1.2rem; line-height: 1.8; color: #bbb;">Set in the small town of Kurukkanmoola, two ordinary men gain extraordinary powers after being struck by the same bolt of lightning.</p>
-                <p style="font-size: 1.2rem; line-height: 1.8; color: #bbb; margin-top: 20px;">What follows is a race against time as one discovers the hero within, while the other is swallowed by the shadows of his own past.</p>
-            </div>
-        </section>
-
-        <!-- Section 4: Media / Soundtrack -->
-        <section id="media" style="background: url('images/strike_bg.png') center/cover;">
-            <div style="background: rgba(0,0,0,0.8); padding: 60px; border: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(20px); width: 80%; text-align: center;">
-                <h2 style="font-family: 'Bebas Neue'; font-size: 3rem; letter-spacing: 4px; margin-bottom: 40px;">THE SOUNDTRACK</h2>
-                <div id="playMain" style="font-size: 5rem; cursor: pointer; color: var(--primary-red); transition: 0.3s;"><i class="fas fa-play-circle"></i></div>
-                <p style="margin-top: 20px; font-size: 0.8rem; color: #666; letter-spacing: 2px;">COMPOSED BY SUSHIN SHYAM</p>
-            </div>
-        </section>
-    </main>
-
-    <audio id="bgmAudio" loop>
-        <source src="BGM.mp3" type="audio/mpeg">
-    </audio>
-
-    <script src="script.js"></script>
-</body>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
