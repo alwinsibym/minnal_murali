@@ -1,4 +1,4 @@
-import React, { useRef, useMemo } from 'react';
+import React, { useRef, useMemo, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Stars, Float, PerspectiveCamera } from '@react-three/drei';
 import * as THREE from 'three';
@@ -56,9 +56,6 @@ const ThreeBackground = () => {
         <Suspense fallback={null}>
           <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
           <LightningParticles />
-          <Float speed={2} rotationIntensity={0.5} floatIntensity={1}>
-             {/* Dynamic background element could go here */}
-          </Float>
         </Suspense>
       </Canvas>
     </div>
