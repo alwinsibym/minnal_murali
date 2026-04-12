@@ -1,73 +1,86 @@
-// 3D & Live Effects Manager
+// Minnal Murali: Requiem Interface Manager
 const logo3D = document.getElementById("logo3D");
-const navbar = document.getElementById("navbar");
+const mainLogo = document.querySelector(".main-logo");
 const flash = document.getElementById("lightningFlash");
-const bgm = document.getElementById("bgm");
+const bgm = document.getElementById("bgmAudio");
 const soundToggle = document.getElementById("soundToggle");
-const vizBars = document.querySelectorAll(".viz-bar");
+const playMain = document.getElementById("playMain");
+const dots = document.querySelectorAll(".nav-dot");
+const sections = document.querySelectorAll("section");
 
-// 1. 3D Logo Tilt Interaction
+// 1. 3D Interaction Logic
 window.addEventListener("mousemove", (e) => {
-    const x = (e.clientX - window.innerWidth / 2) / 20;
-    const y = (e.clientY - window.innerHeight / 2) / 20;
+    const x = (e.clientX - window.innerWidth / 2) / 25;
+    const y = (e.clientY - window.innerHeight / 2) / 25;
 
-    if (logo3D) {
-        logo3D.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
+    if (mainLogo) {
+        mainLogo.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
+    }
+    
+    // Subtle HUD flicker logic
+    if (Math.random() > 0.99) {
+        document.querySelector(".hud-layer").style.opacity = Math.random() * 0.5 + 0.5;
+        setTimeout(() => document.querySelector(".hud-layer").style.opacity = 1, 50);
     }
 });
 
-// 2. Live Lightning Effects
-function triggerLightning() {
-    if (Math.random() > 0.98) {
-        flash.style.backgroundColor = "rgba(255, 255, 255, 0.4)";
-        setTimeout(() => {
-            flash.style.backgroundColor = "rgba(255, 255, 255, 0)";
-            // Potential double strike
-            if (Math.random() > 0.5) {
-                setTimeout(() => {
-                    flash.style.backgroundColor = "rgba(255, 255, 255, 0.2)";
-                    setTimeout(() => flash.style.backgroundColor = "rgba(255, 255, 255, 0)", 50);
-                }, 100);
-            }
-        }, 100);
-    }
-}
-setInterval(triggerLightning, 2000);
-
-// 3. Live Music Logic
-let isPlaying = false;
-soundToggle.addEventListener("click", () => {
-    if (!isPlaying) {
-        bgm.play().catch(() => console.log("User interaction required"));
-        vizBars.forEach(bar => bar.classList.add("playing"));
-    } else {
-        bgm.pause();
-        vizBars.forEach(bar => bar.classList.remove("playing"));
-    }
-    isPlaying = !isPlaying;
-});
-
-// 4. Navbar Scroll Effect (Blur)
-window.addEventListener("scroll", () => {
-    if (window.scrollY > 50) {
-        navbar.classList.add("scrolled");
-    } else {
-        navbar.classList.remove("scrolled");
-    }
-});
-
-// 5. Scroll Reveal
-const revealObserver = new IntersectionObserver((entries) => {
+// 2. Scroll-Snap Sync (Side Dots)
+const scrollObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.classList.add("active");
+            const index = Array.from(sections).indexOf(entry.target);
+            dots.forEach(dot => dot.classList.remove("active"));
+            if (dots[index]) dots[index].classList.add("active");
         }
     });
-}, { threshold: 0.1 });
+}, { threshold: 0.6 });
 
-document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
+sections.forEach(section => scrollObserver.observe(section));
 
-// Home Navigation Redirect Logic
+// Side Dot Click to Scroll
+dots.forEach((dot, index) => {
+    dot.addEventListener("click", () => {
+        sections[index].scrollIntoView({ behavior: 'smooth' });
+    });
+});
+
+// 3. Audio & Live Music Logic
+let isPlaying = false;
+function toggleAudio() {
+    if (!isPlaying) {
+        bgm.play().catch(() => console.log("Init required"));
+        soundToggle.innerHTML = '<i class="fas fa-volume-up"></i> AUDIO_ON';
+        if (playMain) playMain.innerHTML = '<i class="fas fa-pause-circle"></i>';
+    } else {
+        bgm.pause();
+        soundToggle.innerHTML = '<i class="fas fa-volume-off"></i> AUDIO_OFF';
+        if (playMain) playMain.innerHTML = '<i class="fas fa-play-circle"></i>';
+    }
+    isPlaying = !isPlaying;
+}
+
+soundToggle.addEventListener("click", toggleAudio);
+if (playMain) playMain.addEventListener("click", toggleAudio);
+
+// 4. Randomized Lightning Strikes
+function triggerStrike() {
+    if (Math.random() > 0.97) {
+        flash.style.opacity = "0.5";
+        setTimeout(() => {
+            flash.style.opacity = "0";
+            if (Math.random() > 0.5) {
+                setTimeout(() => {
+                    flash.style.opacity = "0.3";
+                    setTimeout(() => flash.style.opacity = "0", 60);
+                }, 100);
+            }
+        }, 80);
+    }
+}
+setInterval(triggerStrike, 3000);
+
+// Smooth logo scroll to home
 document.querySelector(".nav-logo").addEventListener("click", (e) => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    e.preventDefault();
+    sections[0].scrollIntoView({ behavior: 'smooth' });
 });
