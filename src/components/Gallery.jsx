@@ -18,7 +18,11 @@ const Note = styled.p`margin-top: 1.4rem; max-width: 66ch; font-size: .92rem; co
 export default function Gallery() {
   const rv = useReveal()
   return (
-    <Band id="gallery" $tone="light">
+    <Band id="gallery" $tone="light" ghost="Art" floaters={[
+      { kind: 'scissors', size: 110, color: 'var(--crimson)', rot: 22, depth: 0.5, bob: 8, top: '2%', right: '6%' },
+      { kind: 'tape', size: 130, color: '#0d1431', rot: -10, depth: 0.4, bottom: '10%', right: '2%' },
+      { kind: 'bolt', size: 64, color: 'var(--gold)', rot: -14, depth: 0.8, bob: 10, top: '30%', left: '-1%' },
+    ]}>
       <Inner>
         <Reveal><Eyebrow $light>Photos</Eyebrow><Title $light>Fan art and <span>stills</span></Title></Reveal>
         <Grid>

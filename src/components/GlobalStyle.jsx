@@ -21,7 +21,7 @@ export default createGlobalStyle`
   body {
     margin: 0; background: var(--ink); color: ${theme.text};
     font-family: var(--body); font-size: 1.0625rem; line-height: 1.65;
-    overflow-x: hidden; -webkit-font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased;
   }
   img { max-width: 100%; display: block; }
   a { color: inherit; }

@@ -28,7 +28,13 @@ export default function Story() {
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
   const y = useTransform(scrollYProgress, [0, 1], reduce ? ['0%', '0%'] : ['-6%', '6%'])
   return (
-    <Band id="story" $tone="light">
+    <Band id="story" $tone="light" ghost="Storm" floaters={[
+      { kind: 'scissors', size: 130, color: 'var(--crimson)', rot: -18, depth: 0.5, bob: 8, top: '3%', right: '4%' },
+      { kind: 'spool', size: 84, color: '#0d1431', rot: 14, depth: 0.3, bottom: '8%', left: '1%' },
+      { kind: 'bolt', size: 74, color: 'var(--gold)', rot: 14, depth: 0.7, bob: 10, top: '46%', right: '-1%' },
+      { kind: 'crow', size: 90, color: '#0d1431', rot: -8, depth: 0.9, bob: 14, top: '12%', left: '46%' },
+      { kind: 'crow', size: 54, color: '#0d1431', rot: 6, depth: 1.2, bob: 10, top: '20%', left: '56%' },
+    ]}>
       <Inner>
         <Grid>
           <Text>

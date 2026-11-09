@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 import { Play, Star } from 'lucide-react'
 import Lightning from './Lightning'
+import Sparks from './Sparks'
+import Floaters from './Floaters'
 import { film, img } from '../data/film'
 import { cut } from '../theme'
 
@@ -15,6 +17,17 @@ const Bg = styled(motion.div)`
   background: url(${(p) => p.$src}) center 30% / cover no-repeat;
   filter: saturate(1.2) contrast(1.08) brightness(.82);
   &::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7,11,28,.25), rgba(7,11,28,.2) 40%, var(--ink) 100%), radial-gradient(80% 60% at 50% 40%, rgba(200,33,58,.18), transparent 70%); }
+`
+const Rain = styled.div`
+  position: absolute; inset: 0; pointer-events: none; opacity: .5; mix-blend-mode: screen;
+  background-image: linear-gradient(103deg, transparent 0 46%, rgba(170,215,255,.45) 48% 50%, transparent 52%), linear-gradient(103deg, transparent 0 46%, rgba(170,215,255,.3) 48% 50%, transparent 52%);
+  background-size: 38px 120px, 71px 190px; animation: fall .9s linear infinite;
+  @keyframes fall { to { background-position: -22px 120px, -41px 190px; } }
+`
+const Speed = styled.div`
+  position: absolute; inset: 0; pointer-events: none; opacity: .5;
+  background: repeating-conic-gradient(from 200deg at 78% 88%, rgba(255,255,255,.07) 0 1.2deg, transparent 1.2deg 7deg);
+  mask-image: radial-gradient(circle at 78% 88%, transparent 8%, #000 70%); -webkit-mask-image: radial-gradient(circle at 78% 88%, transparent 8%, #000 70%);
 `
 const Copy = styled(motion.div)`
   position: relative; z-index: 2; width: 100%; max-width: 1120px; margin: 0 auto;
@@ -53,7 +66,16 @@ export default function Hero() {
   return (
     <Wrap id="top" ref={ref}>
       <Bg style={{ y }} $src={img('hero-skyline.jpg')} />
+      <Rain />
+      <Speed />
       <Lightning />
+      <Sparks count={70} />
+      <Floaters items={[
+        { kind: 'crow', size: 96, color: '#05081a', rot: -6, depth: 1.2, bob: 16, top: '16%', right: '14%' },
+        { kind: 'crow', size: 58, color: '#05081a', rot: 8, depth: 1.5, bob: 12, top: '24%', right: '26%' },
+        { kind: 'crow', size: 40, color: '#05081a', rot: -2, depth: 1.8, bob: 10, top: '11%', right: '30%' },
+        { kind: 'bolt', size: 110, color: 'var(--gold)', rot: 12, depth: 0.5, bob: 10, bottom: '12%', right: '6%' },
+      ]} />
       <Copy style={{ opacity: fade }}>
         <Kicker>A Malayalam superhero film · Netflix · 2021</Kicker>
         <H1><span>Minnal</span><span>Murali</span></H1>

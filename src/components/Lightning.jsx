@@ -47,6 +47,7 @@ export default function Lightning() {
     }
     const draw = (b, k, a) => {
       ctx.clearRect(0, 0, w, h)
+      ctx.fillStyle = `rgba(150,210,255,${a * 0.16 * (k < 1 ? k : 1)})`; ctx.fillRect(0, 0, w, h)
       stroke(b.main, k, a)
       b.branches.forEach((br) => stroke(br, Math.max(0, k - 0.3) / 0.7, a * 0.7))
     }

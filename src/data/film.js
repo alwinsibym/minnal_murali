@@ -29,11 +29,14 @@ export const cast = [
 
 export const crew = [
   ['Direction', 'Basil Joseph'],
+  ['Screenplay', 'Arun Anirudhan, Justin Mathew'],
   ['Production', 'Sophia Paul, Weekend Blockbusters'],
   ['Cinematography', 'Sameer Thahir'],
   ['Editing', 'Livingston Mathew'],
-  ['Music', 'Sushin Shyam, Shaan Rahman'],
+  ['Music', 'Sushin Shyam (score), Sushin Shyam and Shaan Rahman (songs)'],
   ['Action', 'Vlad Rimburg'],
+  ['Art direction', 'Manu Jagadh'],
+  ['Visual effects', 'Andrew D’Cruz'],
   ['Costume design', 'Melwy J.'],
   ['Sound mixing', 'Justin Jose'],
 ]
@@ -44,10 +47,14 @@ export const trailers = [
 
 export const timeline = [
   ['2018', 'Writer Arun brings the idea to Basil Joseph, who calls a Malayalam superhero film a massive challenge.'],
-  ['2020–21', 'Shooting runs into the COVID-19 pandemic. A large set church is vandalised during the break.'],
+  ['Jan 2019', 'The film is announced.'],
+  ['Dec 2019', 'Principal photography begins, mostly in Alappuzha and Wayanad.'],
+  ['Mar 2020', 'The COVID-19 lockdown halts shooting.'],
+  ['May 2020', 'The church set built near Kalady is vandalised, with heavy losses for the producer.'],
+  ['Mar 2021', 'Shooting resumes, with a stretch in Hassan, Karnataka. It stops and starts again as COVID protocols require.'],
+  ['25 Jul 2021', 'Filming wraps.'],
   ['Mid 2021', 'The planned Onam theatrical release is dropped after the second wave. The film moves to Netflix.'],
-  ['28 Oct 2021', 'Netflix releases the first trailer.'],
-  ['1 Dec 2021', 'A bonus trailer follows.'],
+  ['28 Oct 2021', 'Netflix releases the first trailer. A bonus trailer follows on 1 December.'],
   ['16 Dec 2021', 'Premiere at the Mumbai Film Festival.'],
   ['24 Dec 2021', 'Worldwide release on Netflix in six languages.'],
 ]

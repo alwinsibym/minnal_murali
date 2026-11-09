@@ -2,7 +2,7 @@ import GlobalStyle from './components/GlobalStyle'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Story from './components/Story'
-import Cast from './components/Cast'
+import CastScreens from './components/CastScreens'
 import Trailer from './components/Trailer'
 import Making from './components/Making'
 import Reception from './components/Reception'
@@ -20,7 +20,7 @@ export default function App() {
       <main>
         <Hero />
         <Story />
-        <Cast />
+        <CastScreens />
         <Trailer />
         <Making />
         <Reception />

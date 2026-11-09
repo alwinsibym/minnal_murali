@@ -22,7 +22,11 @@ export default function Trailer() {
   const [playing, setPlaying] = useState(false)
   const t = trailers[0]
   return (
-    <Band id="trailer" $tone="light">
+    <Band id="trailer" $tone="light" ghost="Action" floaters={[
+      { kind: 'tape', size: 150, color: 'var(--crimson)', rot: 12, depth: 0.4, bob: 6, top: '4%', right: '3%' },
+      { kind: 'bolt', size: 90, color: 'var(--gold)', rot: -12, depth: 0.6, bob: 12, bottom: '12%', left: '-1%' },
+      { kind: 'crow', size: 80, color: '#0d1431', rot: 8, depth: 1, bob: 12, bottom: '6%', right: '12%' },
+    ]}>
       <Inner>
         <Reveal><Head><Eyebrow $light>Trailer</Eyebrow><Title $light>Watch the <span>first strike</span></Title></Head></Reveal>
         <Reveal delay={0.1}>

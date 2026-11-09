@@ -11,7 +11,11 @@ const Card = styled.a`display: flex; align-items: center; gap: 1.2rem; padding: 
 
 export default function Watch() {
   return (
-    <Band id="watch" $tone="dark" $flip>
+    <Band id="watch" $tone="dark" $flip ghost="Stream" floaters={[
+      { kind: 'bolt', size: 150, color: 'var(--volt)', rot: 16, depth: 0.6, bob: 12, top: '14%', right: '3%' },
+      { kind: 'crow', size: 90, color: '#9aa6cf', rot: -6, depth: 1, bob: 14, top: '10%', left: '48%' },
+      { kind: 'star', size: 40, color: 'var(--gold)', rot: 12, depth: 0.5, bottom: '12%', left: '44%' },
+    ]}>
       <Inner>
         <Reveal><Eyebrow>Where to watch</Eyebrow><Title>Streaming on <span>Netflix</span></Title></Reveal>
         <Row>

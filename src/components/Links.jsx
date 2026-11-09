@@ -12,7 +12,12 @@ const Card = styled(motion.a)`display: flex; flex-direction: column; gap: .25rem
 export default function Links() {
   const rv = useReveal()
   return (
-    <Band id="links" $tone="dark" $flip>
+    <Band id="links" $tone="dark" $flip ghost="Next" floaters={[
+      { kind: 'church', size: 260, color: '#16225a', rot: 0, depth: 0.2, bottom: '-2%', right: '4%' },
+      { kind: 'pole', size: 90, color: '#1c2f7a', rot: 0, depth: 0.2, bottom: '0%', left: '3%' },
+      { kind: 'crow', size: 80, color: '#9aa6cf', rot: 8, depth: 1, bob: 14, top: '12%', right: '30%' },
+      { kind: 'bolt', size: 100, color: 'var(--volt)', rot: 10, depth: 0.7, bob: 12, top: '8%', right: '6%' },
+    ]}>
       <Inner>
         <Reveal><Eyebrow>Sequel and links</Eyebrow><Title>What comes <span>next</span></Title></Reveal>
         <Reveal delay={0.08}><Para>A sequel has been discussed since January 2022. Basil Joseph has said it will be bigger in scale and budget, but he has not given a release date, and in a recent interview said he is not sure about it for now. Neither he nor Tovino Thomas has said it is cancelled.</Para></Reveal>
