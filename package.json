@@ -1,5 +1,5 @@
 {
-  "name": "minnal-murali-reactor",
+  "name": "minnal-murali",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,14 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@react-three/drei": "^9.88.16",
-    "@react-three/fiber": "^8.15.11",
     "framer-motion": "^10.16.4",
     "lucide-react": "^0.292.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "styled-components": "^6.1.1",
-    "three": "^0.158.0"
+    "styled-components": "^6.1.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",
