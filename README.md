@@ -40,8 +40,8 @@ The focus was not just functionality, but:
 
 ## 🛠️ Tech Stack
 
-* **Frontend:** HTML, CSS, JavaScript
-* **Deployment:** GitHub Pages
+* **Frontend:** React 18, Vite, styled-components, Framer Motion, lucide-react
+* **Deployment:** GitHub Pages (GitHub Actions builds `dist`)
 
 ---
 
@@ -81,9 +81,7 @@ All rights related to *Minnal Murali* belong to their respective owners.
 
 ## 📈 Future Improvements
 
-* 🎞️ Add animations and transitions
-* 🎧 Introduce interactive elements (audio/visual effects)
-* 🧩 Enhance dynamic UI sections
+* * 🧩 Enhance dynamic UI sections
 * 🌙 Advanced theming and visual polish
 
 ---
@@ -91,3 +89,25 @@ All rights related to *Minnal Murali* belong to their respective owners.
 <p align="center">
   <i>“Where creativity meets code.”</i>
 </p>
+
+---
+
+## Run locally
+
+```bash
+npm install
+npm run dev      # development server
+npm run build    # production build in dist/
+```
+
+## Deploy
+
+In the repository settings, set **Pages > Source** to **GitHub Actions**. Every push to `main` then builds and publishes the site.
+
+## Audio
+
+The background track is `public/audio/the-entrance.mp3`. The player tries to autoplay on load. Browsers block sound until the visitor interacts, so the first click, key press or touch starts it. The player has play/pause, mute and volume controls, and remembers the volume.
+
+## Assets
+
+Optimised images are in `public/img`. Original full-size files are kept in `source-assets/` and are not published.

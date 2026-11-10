@@ -1,118 +1,54 @@
-import React from 'react';
-import styled from 'styled-components';
-import { motion } from 'framer-motion';
+import styled from 'styled-components'
+import Band, { Inner, Eyebrow, Title } from './Band'
+import { motion } from 'framer-motion'
+import Reveal, { useReveal } from './Reveal'
+import { cast, crew, img } from '../data/film'
 
-const CastSection = styled.section`
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  padding: 80px 6%;
-  background: var(--bg-dark);
-  position: relative;
-`;
+const Layout = styled.div`display: grid; grid-template-columns: minmax(0, 1fr); gap: 3rem;`
+const Grid = styled.ul`list-style: none; margin: 2rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px;`
+const Card = styled(motion.li)`
+  position: relative; padding: 1.2rem 1.3rem; min-width: 0; overflow: hidden;
+  background: linear-gradient(160deg, rgba(28,47,122,.45), rgba(13,20,49,.7));
+  border: 1px solid ${(p) => (p.$lead ? 'var(--gold)' : 'rgba(154,166,207,.25)')};
+  transition: transform .3s ease, border-color .3s;
+  &:hover { transform: translateY(-4px); border-color: var(--volt); }
+  &::after { content: ''; position: absolute; right: -30px; top: -30px; width: 90px; height: 90px; background: ${(p) => (p.$lead ? 'var(--crimson)' : 'transparent')}; opacity: .35; transform: rotate(45deg); }
+  b { display: block; font-family: var(--display); font-weight: 400; font-size: 1.7rem; letter-spacing: .04em; line-height: 1.1; overflow-wrap: anywhere; position: relative; z-index: 1; }
+  span { display: block; margin-top: .3rem; font-family: var(--mono); font-size: .78rem; color: #9aa6cf; overflow-wrap: anywhere; position: relative; z-index: 1; }
+`
+const Split = styled.div`display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: clamp(1.5rem, 4vw, 3rem); align-items: start; @media (max-width: 820px) { grid-template-columns: minmax(0, 1fr); }`
+const Still = styled.figure`
+  margin: 0; position: relative; overflow: hidden; aspect-ratio: 16 / 10; clip-path: polygon(0 0, 100% 0, 100% 88%, 92% 100%, 0 100%);
+  img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; filter: saturate(1.1) contrast(1.05); }
+  figcaption { position: absolute; left: 0; bottom: 0; padding: 6px 12px; font-family: var(--mono); font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; background: rgba(7,11,28,.78); color: var(--gold); }
+`
+const Table = styled.div`overflow-x: auto; table { width: 100%; min-width: 360px; border-collapse: collapse; } th, td { text-align: left; padding: .65rem 1rem .65rem 0; border-bottom: 1px solid rgba(154,166,207,.22); vertical-align: top; } th { width: 9.5rem; font-family: var(--mono); font-weight: 500; font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: #9aa6cf; }`
 
-const SectionHeader = styled.div`
-  margin-bottom: 50px;
-`;
-
-const Title = styled.h2`
-  font-size: 5rem;
-  color: #fff;
-  margin-bottom: 10px;
-`;
-
-const CardContainer = styled.div`
-  display: flex;
-  gap: 2px;
-  height: 60%;
-  width: 100%;
-`;
-
-const CharCard = styled(motion.div)`
-  flex: 1;
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-  background: #000;
-  transition: flex 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-
-  &:hover {
-    flex: 2;
-  }
-`;
-
-const CharImage = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: grayscale(1) brightness(0.6);
-  transition: all 0.8s ease;
-
-  ${CharCard}:hover & {
-    filter: grayscale(0) brightness(1) scale(1.05);
-  }
-`;
-
-const CharInfo = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 40px;
-  background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.5s ease;
-
-  ${CharCard}:hover & {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
-
-const CharName = styled.h3`
-  font-family: 'Bebas Neue';
-  font-size: 2.5rem;
-  letter-spacing: 2px;
-  color: #fff;
-`;
-
-const CharRole = styled.p`
-  font-size: 0.8rem;
-  letter-spacing: 4px;
-  color: var(--primary-red);
-  text-transform: uppercase;
-  margin-top: 5px;
-`;
-
-const CastData = [
-  { name: "Tovino Thomas", role: "Jaison / Minnal Murali", img: "assets/3BqRwLPqsSgGwbQszv9dUkUrypA.jpg" },
-  { name: "Guru Somasundaram", role: "Shibu", img: "assets/karthik-s-minnal-final-2.jpg" },
-  { name: "Femina George", role: "Bruce Lee Biji", img: "assets/abhi-vpm-minnal-2-copy.jpg" },
-  { name: "Shelly Kishore", role: "Usha", img: "assets/E-gPPEeVIAodK8z.jpeg" }
-];
-
-const Cast = () => {
+export default function Cast() {
+  const rv = useReveal()
   return (
-    <CastSection>
-      <SectionHeader>
-        <Title>The Heroes & Villains</Title>
-        <div style={{ width: '60px', height: '4px', background: 'var(--primary-red)' }}></div>
-      </SectionHeader>
-      
-      <CardContainer>
-        {CastData.map((char, index) => (
-          <CharCard key={index} initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1, duration: 0.8 }}>
-            <CharImage src={char.img} alt={char.name} />
-            <CharInfo>
-              <CharName>{char.name}</CharName>
-              <CharRole>{char.role}</CharRole>
-            </CharInfo>
-          </CharCard>
-        ))}
-      </CardContainer>
-    </CastSection>
-  );
-};
-
-export default Cast;
+    <Band id="cast" $tone="dark" $flip>
+      <Inner>
+        <Layout>
+          <div>
+            <Reveal><Eyebrow>Cast</Eyebrow><Title>The <span>village</span> and the storm</Title></Reveal>
+            <Grid>
+              {cast.map((c, i) => (
+                <Card key={c.actor} $lead={c.lead} {...rv(i * 0.05)}><b>{c.actor}</b><span>{c.role}</span></Card>
+              ))}
+            </Grid>
+          </div>
+          <Split>
+            <Reveal x={-40} y={0}>
+              <Still><img src={img('jaison-celebration.jpg')} alt="Jaison in a red shirt smiling as villagers clap" loading="lazy" /><figcaption>Film still · Jaison</figcaption></Still>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <Eyebrow>Crew</Eyebrow>
+              <Table><table><tbody>{crew.map(([k, v]) => <tr key={k}><th scope="row">{k}</th><td>{v}</td></tr>)}</tbody></table></Table>
+            </Reveal>
+          </Split>
+        </Layout>
+      </Inner>
+    </Band>
+  )
+}
