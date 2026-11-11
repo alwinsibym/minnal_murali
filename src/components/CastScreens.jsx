@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
-import { motion, useInView, useScroll, useTransform, useReducedMotion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Obj from './Objects'
 import Sparks from './Sparks'
 import { characters } from '../data/characters'
@@ -11,6 +12,7 @@ import { cut } from '../theme'
 const Stage = styled.section`
   --cut: ${cut};
   position: relative; isolation: isolate; margin-top: calc(var(--cut) * -1); background: #05081a; color: #e9eefc;
+  padding-bottom: var(--cut);
 `
 const Head = styled.div`
   position: relative; z-index: 2; padding: calc(var(--cut) + 3rem) max(20px, env(safe-area-inset-left, 0px)) 1rem;
@@ -20,29 +22,44 @@ const Head = styled.div`
   h2 span { color: var(--volt); }
   small { display: block; margin-top: .8rem; max-width: 56ch; color: #9aa6cf; font-size: .95rem; }
 `
-const Rail = styled.nav`
-  position: absolute; z-index: 20; top: 0; bottom: 0; right: max(10px, env(safe-area-inset-right, 0px)); width: 62px; pointer-events: none;
-  @media (max-width: 720px) { width: 26px; right: 6px; }
-  div { position: sticky; top: calc(50svh - 260px); display: grid; gap: 10px; justify-items: center; pointer-events: auto; }
-  @media (max-width: 720px) { div { top: calc(50svh - 100px); gap: 8px; } }
+const Wrap = styled.div`position: relative;`
+const Overlay = styled.div`position: sticky; top: 0; z-index: 20; height: 100svh; margin-top: -100svh; pointer-events: none; > * { pointer-events: auto; }`
+const Track = styled.div`
+  display: flex; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none; outline: none;
+  &::-webkit-scrollbar { display: none; }
+  &:focus-visible { box-shadow: inset 0 0 0 2px var(--gold); }
+`
+const Dock = styled.nav`
+  position: absolute; z-index: 20; left: 50%; bottom: 22px; transform: translateX(-50%); display: flex; gap: 10px; align-items: center; padding: 8px 12px;
+  background: rgba(7,11,28,.55); backdrop-filter: blur(6px); border-radius: 40px; max-width: calc(100% - 24px);
+  @media (max-width: 720px) { gap: 8px; padding: 8px 12px; bottom: 74px; }
+`
+const Arrow = styled.button`
+  position: absolute; z-index: 20; top: 50%; ${(p) => (p.$side === 'l' ? 'left' : 'right')}: max(10px, env(safe-area-inset-left, 0px)); transform: translateY(-50%);
+  display: grid; place-items: center; width: 54px; height: 54px; padding: 0; cursor: pointer; border-radius: 50%; color: #fff;
+  background: rgba(7,11,28,.78); border: 2px solid rgba(233,238,252,.4); transition: border-color .25s, box-shadow .25s, opacity .25s;
+  &:hover:not(:disabled) { border-color: ${(p) => p.$c}; box-shadow: 0 0 22px ${(p) => p.$c}; }
+  &:disabled { opacity: .25; cursor: default; }
+  @media (max-width: 720px) { width: 40px; height: 40px; top: auto; bottom: 74px; transform: none; ${(p) => (p.$side === 'l' ? 'left' : 'right')}: 10px; }
 `
 const Dot = styled.button`
-  position: relative; display: grid; place-items: center; width: 52px; height: 52px; padding: 0; cursor: pointer; border-radius: 50%;
+  position: relative; display: grid; place-items: center; width: 46px; height: 46px; padding: 0; cursor: pointer; border-radius: 50%; flex: 0 0 auto;
   background: ${(p) => (p.$on ? 'rgba(7,11,28,.92)' : 'rgba(7,11,28,.7)')}; color: ${(p) => p.$c};
   border: 2px solid ${(p) => (p.$on ? p.$c : 'rgba(233,238,252,.35)')};
   box-shadow: ${(p) => (p.$on ? `0 0 0 3px rgba(7,11,28,.8), 0 0 22px ${p.$c}` : 'none')};
   transform: scale(${(p) => (p.$on ? 1.08 : 0.88)}); transition: transform .3s, border-color .3s, box-shadow .3s;
   &:hover { transform: scale(1.1); border-color: ${(p) => p.$c}; }
   @media (max-width: 720px) { width: 14px; height: 14px; border-width: 2px; background: ${(p) => (p.$on ? p.$c : "rgba(7,11,28,.8)")}; svg { display: none !important; } }
+  @media (min-width: 721px) and (max-width: 1000px) { width: 40px; height: 40px; }
 `
 const Screen = styled.article`
-  position: relative; min-height: 100svh; display: grid; align-items: center; overflow: hidden;
-  padding: 84px max(70px, env(safe-area-inset-right, 0px)) 110px max(20px, env(safe-area-inset-left, 0px));
+  position: relative; flex: 0 0 100%; min-width: 0; scroll-snap-align: start; scroll-snap-stop: always; min-height: max(100svh, 640px); display: grid; align-items: center; overflow: hidden;
+  padding: 64px max(84px, env(safe-area-inset-right, 0px)) 120px max(84px, env(safe-area-inset-left, 0px));
   background:
     radial-gradient(65% 75% at ${(p) => (p.$flip ? '28%' : '72%')} 45%, color-mix(in srgb, ${(p) => p.$c} 30%, transparent), transparent 70%),
     linear-gradient(${(p) => (p.$flip ? '100deg' : '260deg')}, #0a1033, #05081a 70%);
-  border-top: 1px solid rgba(154,166,207,.14);
-  @media (max-width: 720px) { padding-right: 38px; }
+  border-right: 1px solid rgba(154,166,207,.14);
+  @media (max-width: 720px) { padding: 48px 18px 140px; }
   &::before { content: ''; position: absolute; inset: 0; background: var(--grain); opacity: .8; pointer-events: none; }
   &::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(120% 100% at 50% 50%, transparent 55%, rgba(0,0,0,.65)); }
 `
@@ -98,23 +115,18 @@ const Stats = styled.dl`
   dd { margin: .1rem 0 0; font-weight: 500; overflow-wrap: anywhere; }
 `
 
-function CharacterScreen({ c, i, total, onActive }) {
-  const ref = useRef(null)
+function CharacterScreen({ c, i, total, active }) {
   const flip = i % 2 === 1
   const reduce = useReducedMotion()
-  const inView = useInView(ref, { amount: 0.55 })
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
-  const y = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [50, -50])
-  useEffect(() => { if (inView) onActive(i) }, [inView, i, onActive])
   const userPhoto = photo(c.id)
   const src = userPhoto || (c.art ? img(c.art.src) : null)
-  const reveal = (d = 0) => reduce ? {} : { initial: { opacity: 0, y: 30 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true, amount: 0.3 }, transition: { duration: 0.8, delay: d, ease: [0.16, 1, 0.3, 1] } }
+  const reveal = (d = 0) => reduce ? {} : { initial: false, animate: active ? { opacity: 1, x: 0 } : { opacity: 0, x: 40 }, transition: { duration: 0.7, delay: active ? d : 0, ease: [0.16, 1, 0.3, 1] } }
   return (
-    <Screen ref={ref} id={`char-${c.id}`} $flip={flip} $c={c.accent} aria-label={`${c.name}, played by ${c.actor}`}>
+    <Screen id={`char-${c.id}`} role="group" aria-roledescription="slide" aria-label={`${i + 1} of ${total}: ${c.name}, played by ${c.actor}`} $flip={flip} $c={c.accent}>
       <Ghost $c={c.accent} aria-hidden>{c.alias.split(' ').pop().replace(/[^A-Za-z]/g, '') || c.name}</Ghost>
-      {inView && <Sparks count={26} colors={[c.accent, '#ffd27a', '#8fdcff']} />}
+      {active && <Sparks count={26} colors={[c.accent, '#ffd27a', '#8fdcff']} />}
       <Grid $flip={flip}>
-        <ArtBox $flip={flip} style={{ y }}>
+        <ArtBox $flip={flip} {...(reduce ? {} : { initial: false, animate: active ? { opacity: 1, scale: 1 } : { opacity: 0.4, scale: 0.94 }, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } })}>
           {src ? (
             <>
               <Frame $c={c.accent} $flip={flip} $pos={c.art?.pos}><img src={src} alt={userPhoto ? `${c.name}` : `Fan art for ${c.name}`} loading="lazy" /></Frame>
@@ -138,7 +150,7 @@ function CharacterScreen({ c, i, total, onActive }) {
             <Played>Played by<b>{c.actor}</b></Played>
             <Role>{c.role}</Role>
             <About>{c.about}</About>
-            {c.quote && <Quote $c={c.accent}><q>{c.quote.text}</q><cite>{c.name.replace(/[“”]/g, '')} · film subtitles, {c.quote.at}</cite></Quote>}
+            {c.quote && <Quote $c={c.accent}><q>{c.quote.text}</q><cite>{c.quote.by || c.name.replace(/[“”]/g, '')} · Netflix subtitles, {c.quote.at}</cite></Quote>}
           </motion.div>
           <motion.div {...reveal(0.2)}>
             <Stats>{c.stats.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</Stats>
@@ -151,24 +163,51 @@ function CharacterScreen({ c, i, total, onActive }) {
 
 export default function CastScreens() {
   const [active, setActive] = useState(0)
-  const go = (id) => document.getElementById(`char-${id}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  const track = useRef(null)
+  const raf = useRef(0)
+  const reduce = useReducedMotion()
+  const total = characters.length
+  const go = (i) => {
+    const el = track.current; if (!el) return
+    const n = Math.max(0, Math.min(total - 1, i))
+    el.scrollTo({ left: n * el.clientWidth, behavior: reduce ? 'auto' : 'smooth' })
+  }
+  const onScroll = () => {
+    cancelAnimationFrame(raf.current)
+    raf.current = requestAnimationFrame(() => {
+      const el = track.current; if (!el) return
+      setActive(Math.round(el.scrollLeft / Math.max(1, el.clientWidth)))
+    })
+  }
+  useEffect(() => () => cancelAnimationFrame(raf.current), [])
+  const onKey = (e) => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); go(active + 1) }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); go(active - 1) }
+  }
+  const cur = characters[active] || characters[0]
   return (
     <Stage id="cast">
       <Head>
-        <p>Cast · {characters.length} characters</p>
+        <p>Cast · {total} characters</p>
         <h2>The village <span>and the storm</span></h2>
-        <small>Scroll through the characters, or use the buttons on the right. Descriptions avoid major spoilers.</small>
+        <small>Swipe sideways, use the arrows or the icons below. Descriptions avoid major spoilers.</small>
       </Head>
-      <Rail aria-label="Characters">
-        <div>
+      <Wrap>
+        <Track ref={track} onScroll={onScroll} onKeyDown={onKey} tabIndex={0} aria-label="Characters carousel">
+          {characters.map((c, i) => <CharacterScreen key={c.id} c={c} i={i} total={total} active={active === i} />)}
+        </Track>
+        <Overlay>
+        <Arrow type="button" $side="l" $c={cur.accent} onClick={() => go(active - 1)} disabled={active === 0} aria-label="Previous character"><ChevronLeft size={26} /></Arrow>
+        <Arrow type="button" $side="r" $c={cur.accent} onClick={() => go(active + 1)} disabled={active === total - 1} aria-label="Next character"><ChevronRight size={26} /></Arrow>
+        <Dock aria-label="Characters">
           {characters.map((c, i) => (
-            <Dot key={c.id} type="button" $c={c.accent} $on={active === i} onClick={() => go(c.id)} aria-label={`Go to ${c.name}`} aria-current={active === i}>
-              <Obj kind={c.obj} size={24} color={active === i ? c.accent : '#c3cdee'} />
+            <Dot key={c.id} type="button" $c={c.accent} $on={active === i} onClick={() => go(i)} aria-label={`Go to ${c.name}`} aria-current={active === i}>
+              <Obj kind={c.obj} size={22} color={active === i ? c.accent : '#c3cdee'} />
             </Dot>
           ))}
-        </div>
-      </Rail>
-      {characters.map((c, i) => <CharacterScreen key={c.id} c={c} i={i} total={characters.length} onActive={setActive} />)}
+        </Dock>
+        </Overlay>
+      </Wrap>
     </Stage>
   )
 }
