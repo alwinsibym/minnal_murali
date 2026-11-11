@@ -45,6 +45,7 @@ export default function Story() {
               <Facts>
                 <li><b>Genre</b><span>Action, comedy, fantasy</span></li>
                 <li><b>Languages</b><span>Malayalam original. Netflix versions in Tamil, Telugu, Kannada, Hindi and English.</span></li>
+                <li><b>The night</b><span>A TV broadcast warns of a rare planetary alignment, forecast for 9:00 to 9:23 pm.</span></li>
                 <li><b>First screening</b><span>Mumbai Film Festival, 16 December 2021</span></li>
                 <li><b>Distinction</b><span>Widely described as the first Malayalam superhero film</span></li>
               </Facts>

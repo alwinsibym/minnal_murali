@@ -86,6 +86,11 @@ const Alias = styled.p`font-family: 'Cormorant Garamond', Georgia, serif; font-s
 const Played = styled.p`margin-top: 1.2rem; font-family: var(--mono); font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; color: #9aa6cf; b { display: block; margin-top: .15rem; font-family: var(--display); font-weight: 400; letter-spacing: .06em; font-size: 1.9rem; color: #fff; text-transform: uppercase; }`
 const Role = styled.p`margin-top: 1rem; font-size: 1.1rem; font-weight: 500; color: #fff;`
 const About = styled.p`margin-top: .4rem; max-width: 52ch; color: #c3cdee;`
+const Quote = styled.blockquote`
+  margin: 1.2rem 0 0; padding: .1rem 0 .1rem 1rem; border-left: 3px solid ${(p) => p.$c};
+  q { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-size: clamp(1.4rem, 3vw, 1.9rem); line-height: 1.2; quotes: '“' '”'; color: #fff; }
+  cite { display: block; margin-top: .3rem; font-style: normal; font-family: var(--mono); font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; color: #9aa6cf; }
+`
 const Stats = styled.dl`
   margin: 1.4rem 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0; border-top: 1px solid rgba(154,166,207,.3);
   div { padding: .65rem 1rem .65rem 0; min-width: 0; border-bottom: 1px solid rgba(154,166,207,.16); }
@@ -133,6 +138,7 @@ function CharacterScreen({ c, i, total, onActive }) {
             <Played>Played by<b>{c.actor}</b></Played>
             <Role>{c.role}</Role>
             <About>{c.about}</About>
+            {c.quote && <Quote $c={c.accent}><q>{c.quote.text}</q><cite>{c.name.replace(/[“”]/g, '')} · film subtitles, {c.quote.at}</cite></Quote>}
           </motion.div>
           <motion.div {...reveal(0.2)}>
             <Stats>{c.stats.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</Stats>
