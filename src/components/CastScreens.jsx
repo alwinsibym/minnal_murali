@@ -84,6 +84,13 @@ const Frame = styled.div`
   img { width: 100%; height: 100%; object-fit: cover; object-position: ${(p) => p.$pos || '50% 30%'}; filter: saturate(1.2) contrast(1.1) brightness(.92); }
   &::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(5,8,26,.85)), linear-gradient(120deg, color-mix(in srgb, ${(p) => p.$c} 22%, transparent), transparent 50%); mix-blend-mode: multiply; }
 `
+const Switch = styled.div`
+  position: absolute; z-index: 4; right: 16%; top: 14px; display: flex; gap: 4px; padding: 4px; background: rgba(7,11,28,.82); border: 1px solid rgba(233,238,252,.25);
+  button { padding: 7px 11px; cursor: pointer; font-family: var(--mono); font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; color: #c3cdee; background: transparent; border: 0; transition: background .25s, color .25s; }
+  button:hover { color: #fff; }
+  button[aria-pressed='true'] { background: ${(p) => p.$c}; color: #05081a; font-weight: 600; }
+  @media (max-width: 520px) { right: 8%; button { padding: 6px 8px; font-size: .6rem; } }
+`
 const Credit = styled.span`position: absolute; left: 0; bottom: 0; z-index: 3; padding: 6px 12px; font-family: var(--mono); font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; background: rgba(7,11,28,.85); color: var(--gold);`
 const Emblem = styled.div`
   position: absolute; inset: 0; display: grid; place-items: center;
@@ -118,8 +125,11 @@ const Stats = styled.dl`
 function CharacterScreen({ c, i, total, active }) {
   const flip = i % 2 === 1
   const reduce = useReducedMotion()
+  const [fi, setFi] = useState(0)
+  const forms = c.forms || (c.art ? [c.art] : null)
+  const cur = forms ? forms[Math.min(fi, forms.length - 1)] : null
   const userPhoto = photo(c.id)
-  const src = userPhoto || (c.art ? img(c.art.src) : null)
+  const src = userPhoto || (cur ? img(cur.src) : null)
   const reveal = (d = 0) => reduce ? {} : { initial: false, animate: active ? { opacity: 1, x: 0 } : { opacity: 0, x: 40 }, transition: { duration: 0.7, delay: active ? d : 0, ease: [0.16, 1, 0.3, 1] } }
   return (
     <Screen id={`char-${c.id}`} role="group" aria-roledescription="slide" aria-label={`${i + 1} of ${total}: ${c.name}, played by ${c.actor}`} $flip={flip} $c={c.accent}>
@@ -129,8 +139,15 @@ function CharacterScreen({ c, i, total, active }) {
         <ArtBox $flip={flip} {...(reduce ? {} : { initial: false, animate: active ? { opacity: 1, scale: 1 } : { opacity: 0.4, scale: 0.94 }, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } })}>
           {src ? (
             <>
-              <Frame $c={c.accent} $flip={flip} $pos={c.art?.pos}><img src={src} alt={userPhoto ? `${c.name}` : `Fan art for ${c.name}`} loading="lazy" /></Frame>
-              {!userPhoto && c.art?.credit && <Credit>{c.art.credit}</Credit>}
+              <Frame $c={c.accent} $flip={flip} $pos={cur?.pos}>
+                <motion.img key={src} src={src} alt={userPhoto ? c.name : `${c.name}${cur?.label ? ` as ${cur.label}` : ''}, ${cur?.credit?.toLowerCase().startsWith('film') ? 'film still' : 'fan art'}`} loading="lazy" {...(reduce ? {} : { initial: { opacity: 0, scale: 1.04 }, animate: { opacity: 1, scale: 1 }, transition: { duration: 0.6 } })} />
+              </Frame>
+              {!userPhoto && cur?.credit && <Credit>{cur.credit}</Credit>}
+              {forms && forms.length > 1 && (
+                <Switch $c={c.accent} role="group" aria-label={`${c.name} looks`}>
+                  {forms.map((f, k) => <button key={f.label} type="button" aria-pressed={k === fi} onClick={() => setFi(k)}>{f.label}</button>)}
+                </Switch>
+              )}
             </>
           ) : (
             <Emblem $c={c.accent}>

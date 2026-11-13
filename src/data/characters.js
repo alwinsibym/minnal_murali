@@ -7,7 +7,11 @@ export const characters = [
     about: 'A tailor in his foster father’s shop in Kurukkanmoola who dreams of a life in the US. A lightning strike on Christmas Eve changes his plans, and he takes the name Minnal Murali.',
     quote: { text: 'I will go to America and survive doing some superhero antics.', at: '0:46:50' },
     stats: [['Day job', 'Tailor'], ['Setting', 'Kerala, 1990s'], ['Also played by Tovino', 'Martin Rangakala'], ['Honour', 'Best Actor, SIIMA (Malayalam)']],
-    art: { src: 'run-gold.jpg', pos: '58% 30%', credit: 'Fan art by abhi.vpm' },
+    forms: [
+      { label: 'Jaison', src: 'still-jaison.jpg', pos: '50% 28%', credit: 'Film still' },
+      { label: 'Minnal Murali', src: 'still-murali.jpg', pos: '50% 34%', credit: 'Film still' },
+      { label: 'Fan art', src: 'run-gold.jpg', pos: '58% 30%', credit: 'Fan art by abhi.vpm' },
+    ],
   },
   {
     id: 'shibu', name: 'Shibu', alias: 'The other bolt', actor: 'Guru Somasundaram', obj: 'crow', accent: '#c8213a',

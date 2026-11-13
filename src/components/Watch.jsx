@@ -7,6 +7,7 @@ import { film, img } from '../data/film'
 const Row = styled.div`display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(1.5rem, 5vw, 4rem); align-items: center; margin-top: 2rem; @media (max-width: 820px) { grid-template-columns: minmax(0, 1fr); }`
 const Copy = styled.div`p { max-width: 52ch; color: #d3dcf7; } p + p { margin-top: 1rem; }`
 const Langs = styled.ul`list-style: none; padding: 0; margin: 1.4rem 0 0; display: flex; flex-wrap: wrap; gap: 8px; li { font-family: var(--mono); font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; padding: .35rem .7rem; border: 1px solid rgba(232,177,58,.6); color: var(--gold); }`
+const Hero = styled.img`display: block; width: auto; height: clamp(240px, 38vw, 420px); margin: 0 auto -34px; position: relative; z-index: 2; filter: drop-shadow(0 0 24px rgba(82,200,255,.4)) drop-shadow(0 0 60px rgba(200,33,58,.35)); -webkit-mask-image: linear-gradient(180deg, #000 80%, transparent); mask-image: linear-gradient(180deg, #000 80%, transparent); pointer-events: none;`
 const Card = styled.a`display: flex; align-items: center; gap: 1.2rem; padding: 1.4rem; text-decoration: none; color: #fff; background: linear-gradient(135deg, rgba(200,33,58,.9), rgba(120,16,36,.95)); box-shadow: 0 20px 50px -20px rgba(200,33,58,.7); transition: transform .3s, box-shadow .3s; &:hover { transform: translateY(-4px); box-shadow: 0 28px 60px -20px rgba(200,33,58,.9); } img { width: 72px; height: 72px; flex: none; border-radius: 12px; } b { display: block; font-family: var(--display); font-weight: 400; font-size: 2rem; letter-spacing: .05em; line-height: 1.1; } span { font-family: var(--mono); font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; color: #ffd9de; display: flex; align-items: center; gap: 6px; margin-top: .3rem; }`
 
 export default function Watch() {
@@ -27,6 +28,7 @@ export default function Watch() {
             </Copy>
           </Reveal>
           <Reveal delay={0.12} x={30} y={0}>
+            <Hero src={img('murali-cutout.png')} alt="Minnal Murali in costume, arms at his sides" loading="lazy" />
             <Card href={film.netflix} target="_blank" rel="noreferrer"><img src={img('netflix.png')} alt="" /><div><b>Watch Minnal Murali</b><span><Play size={13} fill="currentColor" aria-hidden /> Open on Netflix</span></div></Card>
           </Reveal>
         </Row>

@@ -69,11 +69,14 @@ export const awards = [
 ]
 
 export const gallery = [
-  { src: 'run-gold.jpg', alt: 'Minnal Murali sprinting through a golden city, fan art', credit: 'Art by abhi.vpm', wide: true },
+  { src: 'still-murali-wide.jpg', alt: 'Minnal Murali standing on a rubble hill beside a lit Ferris wheel', credit: 'Film still', wide: true },
+  { src: 'still-jaison.jpg', alt: 'Jaison in a mustard sweater looking back over his shoulder', credit: 'Film still' },
+  { src: 'still-murali.jpg', alt: 'Minnal Murali in costume on a rooftop strung with lights at night', credit: 'Film still' },
+  { src: 'still-murali-night.jpg', alt: 'Minnal Murali standing in smoke on a rubble hill', credit: 'Film still' },
+  { src: 'run-gold.jpg', alt: 'Minnal Murali sprinting through a golden city, fan art', credit: 'Art by abhi.vpm' },
   { src: 'stand-city.jpg', alt: 'Minnal Murali standing above a misty skyline', credit: 'Fan artwork' },
   { src: 'village-strike.jpg', alt: 'Lightning striking a Kerala village at night', credit: 'Fan artwork' },
-  { src: 'red-hood.jpg', alt: 'A red-hooded figure among falling banknotes', credit: 'Fan art' },
-  { src: 'jaison-celebration.jpg', alt: 'Jaison smiling in a red shirt as villagers clap', credit: 'Film still' },
+  { src: 'jaison-celebration.jpg', alt: 'Jaison smiling in a red shirt as villagers clap', credit: 'Film still', wide: true },
 ]
 
 export const links = [

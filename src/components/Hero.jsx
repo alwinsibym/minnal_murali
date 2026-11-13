@@ -29,6 +29,12 @@ const Speed = styled.div`
   background: repeating-conic-gradient(from 200deg at 78% 88%, rgba(255,255,255,.07) 0 1.2deg, transparent 1.2deg 7deg);
   mask-image: radial-gradient(circle at 78% 88%, transparent 8%, #000 70%); -webkit-mask-image: radial-gradient(circle at 78% 88%, transparent 8%, #000 70%);
 `
+const Hero1 = styled(motion.img)`
+  position: absolute; z-index: 1; right: clamp(0px, 5vw, 90px); bottom: 0; height: min(86%, 760px); width: auto; max-width: 52%; object-fit: contain; pointer-events: none; user-select: none;
+  filter: drop-shadow(0 0 28px rgba(82,200,255,.45)) drop-shadow(0 0 70px rgba(200,33,58,.35));
+  -webkit-mask-image: linear-gradient(180deg, #000 82%, transparent 100%); mask-image: linear-gradient(180deg, #000 82%, transparent 100%);
+  @media (max-width: 820px) { height: 52%; max-width: 62%; right: -6%; opacity: .72; }
+`
 const Copy = styled(motion.div)`
   position: relative; z-index: 2; width: 100%; max-width: 1120px; margin: 0 auto;
   padding: 120px max(20px, env(safe-area-inset-left, 0px)) 40px;
@@ -62,10 +68,11 @@ export default function Hero() {
   const reduce = useReducedMotion()
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
   const y = useTransform(scrollYProgress, [0, 1], reduce ? ['0%', '0%'] : ['0%', '18%'])
+  const yFig = useTransform(scrollYProgress, [0, 1], reduce ? ['0%', '0%'] : ['0%', '-8%'])
   const fade = useTransform(scrollYProgress, [0, 0.8], reduce ? [1, 1] : [1, 0.15])
   return (
     <Wrap id="top" ref={ref}>
-      <Bg style={{ y }} $src={img('hero-skyline.jpg')} />
+      <Bg style={{ y }} $src={img('hero-city.jpg')} />
       <Rain />
       <Speed />
       <Lightning />
@@ -76,6 +83,7 @@ export default function Hero() {
         { kind: 'crow', size: 40, color: '#05081a', rot: -2, depth: 1.8, bob: 10, top: '11%', right: '30%' },
         { kind: 'bolt', size: 110, color: 'var(--gold)', rot: 12, depth: 0.5, bob: 10, bottom: '12%', right: '6%' },
       ]} />
+      <Hero1 src={img('murali-cutout.png')} alt="" aria-hidden style={{ y: yFig }} {...(reduce ? {} : { initial: { opacity: 0, scale: 0.94 }, animate: { opacity: 1, scale: 1 }, transition: { duration: 1.4, ease: [0.16, 1, 0.3, 1], delay: 0.3 } })} />
       <Copy style={{ opacity: fade }}>
         <Kicker>A Malayalam superhero film · Netflix · 2021</Kicker>
         <H1><span>Minnal</span><span>Murali</span></H1>

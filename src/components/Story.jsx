@@ -14,7 +14,7 @@ const Frame = styled.div`
   @media (max-width: 820px) { aspect-ratio: 4 / 3; }
 `
 const Pic = styled(motion.img)`
-  position: absolute; inset: -10% 0; width: 100%; height: 120%; object-fit: cover; object-position: 55% 40%;
+  position: absolute; inset: -10% 0; width: 100%; height: 120%; object-fit: cover; object-position: 50% 30%;
   filter: grayscale(1) contrast(1.15) brightness(.95);
   transition: filter .8s ease;
   ${Frame}:hover & { filter: grayscale(0) contrast(1.05) saturate(1.2); }
@@ -53,8 +53,8 @@ export default function Story() {
           </Text>
           <Reveal x={50} y={0}>
             <Frame ref={ref}>
-              <Pic style={{ y }} src={img('costume-city.jpg')} alt="Minnal Murali in his red and blue suit on a rock above a misty city" loading="lazy" />
-              <Tag>Hover for colour</Tag>
+              <Pic style={{ y }} src={img('still-jaison.jpg')} alt="Jaison in a mustard sweater looking back over his shoulder" loading="lazy" />
+              <Tag>Jaison · hover for colour</Tag>
             </Frame>
           </Reveal>
         </Grid>
